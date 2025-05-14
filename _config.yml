@@ -116,7 +116,7 @@ toc: true
 # 评论系统设置
 comments:
   # 评论系统的全局开关。留空表示禁用。可选值: 'disqus', 'utterances', 'giscus'
-  provider:
+  provider: "giscus"
   # 各个评论系统的具体配置选项：
   # disqus:
     # 填入 Disqus 的 shortname (不是用户名)
