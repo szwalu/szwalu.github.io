@@ -21,7 +21,7 @@ title: 天秋的博客
 tagline: 天(T)秋(Q)，来自辛弃疾的词“天凉好个秋”。abc，则是记录生活、分享思考的一点一滴。天秋有情，字母有声，TQabc.com，讲述博主点滴故事。
 
 # 网站描述 (主要用于搜索引擎优化，告诉搜索引擎网站是关于什么的)
-description: >- # 闲话
+description: >- # 天秋的个人博客，主要记录日常生活中的点滴、心情随笔和一些思考感悟。分享真实的瞬间，感受生活的美好。
 
 # 网站的完整 URL (协议 + 域名)。注意末尾不要加 '/'。
 # 例如 'https://username.github.io' 或 'https://www.yourdomain.com'
@@ -42,7 +42,7 @@ social:
   # 你的全名。将作为文章的默认作者名和页脚的版权所有者显示。
   name: 天秋
   # 你的电子邮件地址 (可能会显示在联系方式等处)
-  email: tq@tqabc.com # change to your email address
+  email: tq@woabc.com # change to your email address
   # 在页脚等处显示的社交链接列表。
   links:
     # 第一个链接通常用作版权所有者的链接。
