@@ -118,11 +118,11 @@ comments:
   # 评论系统的全局开关。留空表示禁用。可选值: 'disqus', 'utterances', 'giscus'
   provider:
   # 各个评论系统的具体配置选项：
-  disqus:
+  # disqus:
     # 填入 Disqus 的 shortname (不是用户名)
     shortname:
   # utterances 设置 (基于 GitHub Issues)
-  utterances:
+  # utterances:
     # 你的 GitHub 仓库名 (<用户名>/<仓库名>)
     repo:
     # 文章与 Issue 的映射方式 (如 'pathname', 'url', 'title')
@@ -130,21 +130,21 @@ comments:
   # Giscus 设置 (基于 GitHub Discussions)
   giscus:
     # 你的 GitHub 仓库名 (<用户名>/<仓库名>)
-    repo:
+    repo: "szwalu/szwalu.github.io"
     # 你的仓库 ID (从 giscus.app 获取)
-    repo_id:
+    repo_id: "R_kgDOOo721g"
     # Discussion 分类名称
-    category:
+    category: "博客评论"
     # Discussion 分类 ID (从 giscus.app 获取)
-    category_id:
+    category_id: "DIC_kwDOOo721s4CqH_o"
     # 文章与 Discussion 的映射方式 (可选, 默认 'pathname')
-    mapping:
+    mapping: "pathname"
     # 是否精确匹配 (可选, 默认 '0')
-    strict:
+    strict: "0"
     # 评论框位置 (可选, 默认 'bottom')
-    input_position:
+    input_position: "bottom"
     # 评论框语言 (可选, 默认跟随 `site.lang`)
-    lang:
+    lang: "zh-CN"
     # 是否启用 Reactions (点赞等) (可选, 默认 '1')
     reactions_enabled:
 
