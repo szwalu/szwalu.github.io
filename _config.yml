@@ -69,9 +69,9 @@ analytics:
   google:
     # 填入你的 Google Analytics Measurement ID (G-XXXXXXXXXX)
     id:
-  goatcounter: "szwalu"
+  goatcounter:
     # 填入你的 GoatCounter ID
-    id:
+    id: "szwalu"
   umami:
     # 填入你的 Umami ID
     id:
