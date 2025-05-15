@@ -1,57 +1,45 @@
-/* assets/css/my-custom-styles.css (或 custom.scss) */
+/* assets/css/my-custom-styles.css */
 
-/* 仅在屏幕宽度小于或等于 849px 时应用的样式 */
 @media (max-width: 849px) {
 
   /* 调整 topbar 标题字体大小 */
   #topbar-title {
-    font-size: 1.6em; /* 你觉得合适的字体大小，可以微调 */
-    /* color: #your-desired-color; */ /* 如果你想改颜色，取消注释并填入颜色值 */
+    font-size: 1.6em !important; /* 或者你期望的其他大小 */
+    /* color: initial !important; */ /* 如果想恢复默认颜色，或者指定你想要的颜色 */
   }
 
   /* 固定 topbar 的样式 */
   #topbar {
-    position: fixed !important; /* 使用 !important 尝试覆盖主题默认定位 */
+    position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important; /* 或者 width: 100% !important; */
-    
-    height: 3.5rem; /* 设置一个明确的页眉高度 (约 56px)，你可以根据需要调整这个值 */
-                    /* 例如：50px, 60px, 4rem 等 */
-    
-    z-index: 1030 !important; /* 确保在其他内容之上 */
-    
-    /* 确保有背景色，否则下方内容会透上来 */
-    /* 尝试使用 Chirpy 的 CSS 变量，如果不行就用具体颜色 */
-    background-color: var(--topbar-bg, white) !important; /* 使用 white 作为备用颜色，确保有背景 */
 
-    /* 可以加一点阴影增加层次感，可选 */
+    height: 3.5rem; /* 例如 56px，根据需要调整 */
+
+    z-index: 1030 !important; 
+
+    background-color: white !important; /* 使用明确的背景色确保可见 */
+
+    /* 可选的阴影 */
     /* box-shadow: 0 1px 3px rgba(0,0,0,0.1); */
   }
 
   /* 为 body 添加 padding-top，防止内容被固定的 topbar 遮挡 */
-  /* 这个值需要等于或略大于上面 #topbar 设置的 height */
   body {
-    padding-top: 3.5rem !important; /* 与 #topbar 的 height 保持一致 */
+    padding-top: 3.5rem !important; /* 必须与 #topbar 的 height 一致 */
   }
 
-  /* 如果 Chirpy 的侧边栏 (#sidebar) 在 topbar 固定后显示位置不正确 (比如被 topbar 遮挡)，
-     你可能需要取消注释并调整下面的 CSS。
-     这个值也应该是 topbar 的高度。
-  */
+  /* 可选：如果侧边栏 #sidebar 在 topbar 固定后显示位置不正确 */
   /*
   #sidebar {
-    padding-top: 3.5rem !important; // 或者直接设置 top: 3.5rem; 具体看 sidebar 的定位方式
+    padding-top: 3.5rem !important; 
   }
   */
 
-  /* 如果 Chirpy 主题的主要内容区域有一个特定的包裹器 (wrapper)，
-     并且 body 的 padding-top 没有生效，你可能需要针对那个包裹器来设置 padding-top。
-     例如，Chirpy 中可能有一个类似 #main-wrapper 或 #panel-wrapper 的 ID。
-     你需要用开发者工具找到它。
-  */
+  /* 可选：如果主要内容区 #main-wrapper 或 #panel-wrapper 的 padding-top 需要调整 */
   /*
-  #main-wrapper { // 或者 #panel-wrapper 等，取决于 Chirpy 的结构
+  #main-wrapper { // 或 #panel-wrapper 
     padding-top: 3.5rem !important; 
   }
   */
