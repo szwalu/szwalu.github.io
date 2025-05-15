@@ -1,41 +1,58 @@
 /* assets/css/my-custom-styles.css (或 custom.scss) */
 
-@media (max-width: 849px) { /* 和你之前调整标题字体大小的断点保持一致 */
+/* 仅在屏幕宽度小于或等于 849px 时应用的样式 */
+@media (max-width: 849px) {
+
+  /* 调整 topbar 标题字体大小 */
   #topbar-title {
-    font-size: 1.5em; /* 你最终确定的移动端标题字体大小 */
-    /* color: #your-desired-color; */ 
+    font-size: 1.6em; /* 你觉得合适的字体大小，可以微调 */
+    /* color: #your-desired-color; */ /* 如果你想改颜色，取消注释并填入颜色值 */
   }
 
-  /* 新增：固定 topbar 的样式 */
+  /* 固定 topbar 的样式 */
   #topbar {
-    position: fixed; /* 将 topbar 固定定位 */
-    top: 0;          /* 紧贴页面顶部 */
-    left: 0;         /* 紧贴页面左边 */
-    right: 0;        /* 或者 width: 100%; 确保它横向铺满 */
-    z-index: 1030;   /* 设置一个较高的 z-index，确保它在其他内容之上。
-                       Chirpy 的 sidebar z-index 可能是 1020，topbar 需要更高。
-                       如果还不行，可以尝试更大的值，比如 9999。 */
-    background-color: var(--topbar-bg, #f8f9fa); /* 确保有背景色，否则下方内容会透上来。
-                                                   var(--topbar-bg) 是尝试使用 Chirpy 的主题变量，
-                                                   如果无效，可以换成具体的颜色值，如 #ffffff (白色) 或 #f8f9fa (浅灰) */
-    /* box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075); */ /* 可以加一点阴影增加层次感，可选 */
+    position: fixed !important; /* 使用 !important 尝试覆盖主题默认定位 */
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important; /* 或者 width: 100% !important; */
+    
+    height: 3.5rem; /* 设置一个明确的页眉高度 (约 56px)，你可以根据需要调整这个值 */
+                    /* 例如：50px, 60px, 4rem 等 */
+    
+    z-index: 1030 !important; /* 确保在其他内容之上 */
+    
+    /* 确保有背景色，否则下方内容会透上来 */
+    /* 尝试使用 Chirpy 的 CSS 变量，如果不行就用具体颜色 */
+    background-color: var(--topbar-bg, white) !important; /* 使用 white 作为备用颜色，确保有背景 */
+
+    /* 可以加一点阴影增加层次感，可选 */
+    /* box-shadow: 0 1px 3px rgba(0,0,0,0.1); */
   }
 
-  /* 因为 topbar 现在是 fixed 定位，脱离了文档流，
-     它会覆盖页面顶部的内容。我们需要给页面的主要内容区域
-     或者 body 添加一个上边距 (padding-top) 来把内容往下推。 */
-  body { 
-    /* 这个值需要等于或略大于你 topbar 的实际高度 */
-    /* 你需要用开发者工具测量一下 topbar 在固定后的高度 */
-    padding-top: 4rem !important; /* 假设 topbar 的高度大约是 4rem (64px)。请根据实际情况调整！*/
-                                 /* 使用 !important 可能需要确保覆盖主题原有 padding */
+  /* 为 body 添加 padding-top，防止内容被固定的 topbar 遮挡 */
+  /* 这个值需要等于或略大于上面 #topbar 设置的 height */
+  body {
+    padding-top: 3.5rem !important; /* 与 #topbar 的 height 保持一致 */
   }
 
-  /* Chirpy 主题的侧边栏 (sidebar) 可能也需要调整 top 值，
-     因为它可能默认从页面顶端开始。如果 topbar 固定了，
-     sidebar 的起点可能需要下移。这部分比较复杂，我们先看 topbar 固定效果。*/
-  /* #sidebar {
-    top: 4rem; // 假设 topbar 高度是 4rem 
+  /* 如果 Chirpy 的侧边栏 (#sidebar) 在 topbar 固定后显示位置不正确 (比如被 topbar 遮挡)，
+     你可能需要取消注释并调整下面的 CSS。
+     这个值也应该是 topbar 的高度。
+  */
+  /*
+  #sidebar {
+    padding-top: 3.5rem !important; // 或者直接设置 top: 3.5rem; 具体看 sidebar 的定位方式
+  }
+  */
+
+  /* 如果 Chirpy 主题的主要内容区域有一个特定的包裹器 (wrapper)，
+     并且 body 的 padding-top 没有生效，你可能需要针对那个包裹器来设置 padding-top。
+     例如，Chirpy 中可能有一个类似 #main-wrapper 或 #panel-wrapper 的 ID。
+     你需要用开发者工具找到它。
+  */
+  /*
+  #main-wrapper { // 或者 #panel-wrapper 等，取决于 Chirpy 的结构
+    padding-top: 3.5rem !important; 
   }
   */
 }
