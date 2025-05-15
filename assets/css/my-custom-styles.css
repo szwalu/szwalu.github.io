@@ -2,74 +2,31 @@
 
 @media (max-width: 849px) {
 
-  /* 强制隐藏 Service Worker 更新提示 (如果需要，你需要找到它的正确选择器) */
-  /* 示例，你需要用开发者工具找到它的实际 ID 或 Class */
-  /* #pwa-update-notice, .pwa-prompt { 
-    display: none !important;
-    visibility: hidden !important;
-  } 
-  */
+  /* ... (你已有的 #topbar-title, #topbar, body 的样式) ... */
 
-  /* 调整 topbar 标题字体大小 */
-  #topbar-title {
-    font-size: 1.6em !important; /* 或者你期望的大小 */
-    /* color: initial !important; */ 
+  /* --- Logo 图片样式调整 --- */
+  #site-logo-img {
+    height: 30px !important;   /* 关键：设置一个明确的高度。30px 是一个常用值，你可以调整为你想要的大小，比如 25px, 35px 等 */
+    width: auto !important;    /* 让宽度根据高度自动按比例缩放，以保持图片比例正确 */
+    max-height: 100% !important; /* 确保 Logo 不会超出其直接父容器的高度 (如果父容器有高度限制) */
+    object-fit: contain;     /* 确保图片在指定高度内完整显示并保持其宽高比，而不是被拉伸或裁剪 */
+    vertical-align: middle;  /* 尝试帮助垂直对齐，但对于 Flexbox 容器内的元素，通常由 align-items 控制 */
+    margin-right: 8px !important; /* 与右边标题的间距，如果需要的话 */
+    /* display: inline-block !important; */ /* 如果它不是 Flex 子项，这可能有助于控制大小和对齐 */
   }
 
-  /* --- 固定 topbar 的核心样式 --- */
-  #topbar {
-    /* 定位属性 */
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important; /* 明确宽度为100% */
-    
-    /* 尺寸属性 */
-    height: 56px !important; /* 设置一个明确的像素高度，先用这个尝试，之后可以改成 rem */
-    max-height: 56px !important; /* 防止内容撑开 */
-    min-height: 56px !important; /* 确保有最小高度 */
-    line-height: 56px !important; /* 尝试让内部元素垂直居中 (如果内部是inline或inline-block) */
-                                 /* 如果内部是flex，则通过flex的align-items控制 */
-    
-    /* 盒子模型 */
-    padding: 0 1rem !important; /* 设置左右内边距，上下内边距设为0，因为高度已固定 */
-    margin: 0 !important;
-    box-sizing: border-box !important; /* 确保 padding 和 border 不会增加元素的总宽度/高度 */
-    
-    /* 外观和层叠 */
-    background-color: white !important; /* 明确的背景色 */
-    z-index: 1050 !important;   /* 比之前更高一点的 z-index */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important; /* 加一点阴影 */
-
-    /* Flexbox 相关 (Chirpy 的 #topbar 本身是 d-flex) 
-       确保内部元素能正确对齐和分布 */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important; 
+  /* 你可能还需要确保包裹 Logo 的 <a> 标签（如果你用了 #site-logo-link）
+     或者更外层的 .site-branding 容器不会不必要地撑大 Logo */
+  #site-logo-link {
+    line-height: 0; /* 有时可以帮助消除 <a> 标签因为字体产生的额外空间 */
+    display: inline-flex; /* 或者 display: inline-block; 帮助对齐 */
+    align-items: center; /* 如果是 flex 容器，帮助垂直居中 */
   }
 
-  /* 确保 #topbar 内的直接子元素不会有奇怪的 margin 或 padding 导致高度问题 */
-  #topbar > * {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+  .site-branding {
+    /* 这个容器我们之前设置了 d-flex align-items-center (通过 Bootstrap 类或你的 CSS) */
+    /* 确保它不会给 img 过大的空间 */
+    /* 你可能不需要为它添加额外的 CSS，除非你想微调它内部元素的对齐或间距 */
   }
 
-  /* --- 调整 body 的 padding-top --- */
-  body {
-    padding-top: 56px !important; /* 必须与 #topbar 的 height 一致 */
-  }
-
-  /* --- (可选) 调整侧边栏 #sidebar 的位置 --- */
-  /* 如果侧边栏在 topbar 固定后显示位置不正确 */
-  /* #sidebar {
-    padding-top: 56px !important; // 或者 top: 56px !important; 取决于其定位方式
-  }
-  */
-
-  /* --- (可选) 调整主要内容区域 #main-wrapper 或 #panel-wrapper --- */
-  /*
-  #main-wrapper, #panel-wrapper {
-    margin-top: 56px !important; // 如果 body padding-top 不够, 试试这个
-  }
-  */
 }
