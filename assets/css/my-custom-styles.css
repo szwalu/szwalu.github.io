@@ -2,7 +2,7 @@
 
 @media (max-width: 849px) {
   #topbar-title {
-    font-size: 1.5em; /* 一个你觉得合适的字体大小 */
+    font-size: 1.4em; /* 一个你觉得合适的字体大小 */
     /* color: #your-desired-color; */ /* 如果你想改颜色，取消注释并填入颜色值 */
   }
 }
