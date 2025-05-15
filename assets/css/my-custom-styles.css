@@ -30,13 +30,13 @@
   #site-logo-link {
     display: inline-flex !important; 
     align-items: center !important;
-    margin-right: 8px;
+    margin-right: 4px;
   }
   */
 
   /* Logo 图片样式调整 */
   #site-logo-img {
-    height: 30px !important;
+    height: 40px !important;
     width: auto !important;
     max-height: 100%; /* 通常不需要 !important，除非有冲突 */
     object-fit: contain;
@@ -45,8 +45,8 @@
 
   /* Topbar 标题字体大小调整 */
   #topbar-title {
-    font-size: 1.6em !important;
-    margin-left: 8px !important; /* 因为左边有 Logo */
+    font-size: 1.5em !important;
+    margin-left: 4px !important; /* 因为左边有 Logo */
   }
 
   /* --- 固定 Topbar 的核心样式 (这部分保持不变) --- */
