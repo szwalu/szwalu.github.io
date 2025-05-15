@@ -2,7 +2,7 @@
 
 /* Logo 样式 */
 #site-logo-img {
-  height: 30px; /* 设置你想要的 Logo 高度，宽度会自动缩放 */
+  height: 40px; /* 设置你想要的 Logo 高度，宽度会自动缩放 */
   width: auto;
   vertical-align: middle; /* 尝试垂直对齐 */
   /* 你可能还需要一些 margin-right 来和标题隔开，
