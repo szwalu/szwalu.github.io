@@ -1,46 +1,75 @@
-/* assets/css/my-custom-styles.css */
+/* assets/css/my-custom-styles.css (或 custom.scss) */
 
 @media (max-width: 849px) {
 
+  /* 强制隐藏 Service Worker 更新提示 (如果需要，你需要找到它的正确选择器) */
+  /* 示例，你需要用开发者工具找到它的实际 ID 或 Class */
+  /* #pwa-update-notice, .pwa-prompt { 
+    display: none !important;
+    visibility: hidden !important;
+  } 
+  */
+
   /* 调整 topbar 标题字体大小 */
   #topbar-title {
-    font-size: 1.6em !important; /* 或者你期望的其他大小 */
-    /* color: initial !important; */ /* 如果想恢复默认颜色，或者指定你想要的颜色 */
+    font-size: 1.6em !important; /* 或者你期望的大小 */
+    /* color: initial !important; */ 
   }
 
-  /* 固定 topbar 的样式 */
+  /* --- 固定 topbar 的核心样式 --- */
   #topbar {
+    /* 定位属性 */
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    right: 0 !important; /* 或者 width: 100% !important; */
+    width: 100% !important; /* 明确宽度为100% */
+    
+    /* 尺寸属性 */
+    height: 56px !important; /* 设置一个明确的像素高度，先用这个尝试，之后可以改成 rem */
+    max-height: 56px !important; /* 防止内容撑开 */
+    min-height: 56px !important; /* 确保有最小高度 */
+    line-height: 56px !important; /* 尝试让内部元素垂直居中 (如果内部是inline或inline-block) */
+                                 /* 如果内部是flex，则通过flex的align-items控制 */
+    
+    /* 盒子模型 */
+    padding: 0 1rem !important; /* 设置左右内边距，上下内边距设为0，因为高度已固定 */
+    margin: 0 !important;
+    box-sizing: border-box !important; /* 确保 padding 和 border 不会增加元素的总宽度/高度 */
+    
+    /* 外观和层叠 */
+    background-color: white !important; /* 明确的背景色 */
+    z-index: 1050 !important;   /* 比之前更高一点的 z-index */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important; /* 加一点阴影 */
 
-    height: 3.5rem; /* 例如 56px，根据需要调整 */
-
-    z-index: 1030 !important; 
-
-    background-color: white !important; /* 使用明确的背景色确保可见 */
-
-    /* 可选的阴影 */
-    /* box-shadow: 0 1px 3px rgba(0,0,0,0.1); */
+    /* Flexbox 相关 (Chirpy 的 #topbar 本身是 d-flex) 
+       确保内部元素能正确对齐和分布 */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important; 
   }
 
-  /* 为 body 添加 padding-top，防止内容被固定的 topbar 遮挡 */
+  /* 确保 #topbar 内的直接子元素不会有奇怪的 margin 或 padding 导致高度问题 */
+  #topbar > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* --- 调整 body 的 padding-top --- */
   body {
-    padding-top: 3.5rem !important; /* 必须与 #topbar 的 height 一致 */
+    padding-top: 56px !important; /* 必须与 #topbar 的 height 一致 */
   }
 
-  /* 可选：如果侧边栏 #sidebar 在 topbar 固定后显示位置不正确 */
-  /*
-  #sidebar {
-    padding-top: 3.5rem !important; 
+  /* --- (可选) 调整侧边栏 #sidebar 的位置 --- */
+  /* 如果侧边栏在 topbar 固定后显示位置不正确 */
+  /* #sidebar {
+    padding-top: 56px !important; // 或者 top: 56px !important; 取决于其定位方式
   }
   */
 
-  /* 可选：如果主要内容区 #main-wrapper 或 #panel-wrapper 的 padding-top 需要调整 */
+  /* --- (可选) 调整主要内容区域 #main-wrapper 或 #panel-wrapper --- */
   /*
-  #main-wrapper { // 或 #panel-wrapper 
-    padding-top: 3.5rem !important; 
+  #main-wrapper, #panel-wrapper {
+    margin-top: 56px !important; // 如果 body padding-top 不够, 试试这个
   }
   */
 }
