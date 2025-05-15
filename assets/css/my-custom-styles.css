@@ -30,7 +30,7 @@
   #site-logo-link {
     display: inline-flex !important; 
     align-items: center !important;
-    margin-right: 4px;
+    margin-right: 1px;
   }
   */
 
@@ -46,7 +46,7 @@
   /* Topbar 标题字体大小调整 */
   #topbar-title {
     font-size: 1.5em !important;
-    margin-left: 4px !important; /* 因为左边有 Logo */
+    margin-left: 1px !important; /* 因为左边有 Logo */
   }
 
   /* --- 固定 Topbar 的核心样式 (这部分保持不变) --- */
