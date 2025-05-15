@@ -1,34 +1,41 @@
 /* assets/css/my-custom-styles.css (或 custom.scss) */
 
-/* Logo 样式 */
-#site-logo-img {
-  height: 40px; /* 设置你想要的 Logo 高度，宽度会自动缩放 */
-  width: auto;
-  vertical-align: middle; /* 尝试垂直对齐 */
-  /* 你可能还需要一些 margin-right 来和标题隔开，
-     但我们在 HTML 里用了 ms-2，也可以在这里用 CSS 控制 */
-}
-
-/* 可以包裹 Logo 和标题的容器，进行微调 */
-.site-branding {
-  /* 如果需要，可以在这里添加更多 Flexbox 或对齐的样式 */
-}
-
-/* 针对移动端，你可能需要调整 Logo 和标题的相对大小或间距 */
-@media (max-width: 849px) { // 和你之前调整标题字体大小的断点保持一致
-  #site-logo-img {
-    height: 25px; // 移动端 Logo 可能需要小一点
-  }
-
+@media (max-width: 849px) { /* 和你之前调整标题字体大小的断点保持一致 */
   #topbar-title {
-    font-size: 1.6em; /* 你之前调整好的移动端字体大小 */
-    /* 你可能还需要调整它的 margin-left，因为现在左边有了 Logo */
-    /* margin-left: 5px !important; */ /* 示例 */
+    font-size: 1.5em; /* 你最终确定的移动端标题字体大小 */
+    /* color: #your-desired-color; */ 
   }
 
-  /* 如果在移动端，Logo 和标题挤在一起了，可以调整 .site-branding 内部的间距
-     或者让标题换行等，这取决于你想要的效果 */
-  .site-branding {
-    // flex-grow: 1; /* 尝试让它占据更多空间，如果需要的话 */
+  /* 新增：固定 topbar 的样式 */
+  #topbar {
+    position: fixed; /* 将 topbar 固定定位 */
+    top: 0;          /* 紧贴页面顶部 */
+    left: 0;         /* 紧贴页面左边 */
+    right: 0;        /* 或者 width: 100%; 确保它横向铺满 */
+    z-index: 1030;   /* 设置一个较高的 z-index，确保它在其他内容之上。
+                       Chirpy 的 sidebar z-index 可能是 1020，topbar 需要更高。
+                       如果还不行，可以尝试更大的值，比如 9999。 */
+    background-color: var(--topbar-bg, #f8f9fa); /* 确保有背景色，否则下方内容会透上来。
+                                                   var(--topbar-bg) 是尝试使用 Chirpy 的主题变量，
+                                                   如果无效，可以换成具体的颜色值，如 #ffffff (白色) 或 #f8f9fa (浅灰) */
+    /* box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075); */ /* 可以加一点阴影增加层次感，可选 */
   }
+
+  /* 因为 topbar 现在是 fixed 定位，脱离了文档流，
+     它会覆盖页面顶部的内容。我们需要给页面的主要内容区域
+     或者 body 添加一个上边距 (padding-top) 来把内容往下推。 */
+  body { 
+    /* 这个值需要等于或略大于你 topbar 的实际高度 */
+    /* 你需要用开发者工具测量一下 topbar 在固定后的高度 */
+    padding-top: 4rem !important; /* 假设 topbar 的高度大约是 4rem (64px)。请根据实际情况调整！*/
+                                 /* 使用 !important 可能需要确保覆盖主题原有 padding */
+  }
+
+  /* Chirpy 主题的侧边栏 (sidebar) 可能也需要调整 top 值，
+     因为它可能默认从页面顶端开始。如果 topbar 固定了，
+     sidebar 的起点可能需要下移。这部分比较复杂，我们先看 topbar 固定效果。*/
+  /* #sidebar {
+    top: 4rem; // 假设 topbar 高度是 4rem 
+  }
+  */
 }
