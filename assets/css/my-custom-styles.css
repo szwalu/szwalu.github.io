@@ -26,7 +26,7 @@
 @media (max-width: 767px) { /* 或者你常用的其他移动端断点，比如 849px */
   main h1[data-toc-skip] { /* 使用 main h1[data-toc-skip] 会更精确，只选中那个不进目录的主标题 */
                             /* 如果只想用 main h1 也可以，但前者更保险 */
-    font-size: 1.8rem !important; /* 你期望的移动端字体大小。
+    font-size: 1.6rem !important; /* 你期望的移动端字体大小。
                                      可以尝试 1.6rem, 1.7rem, 28px, 30px 等。*/
     /* line-height: 1.3 !important; */ /* 如果需要，也可以调整行高 */
   }
