@@ -20,7 +20,7 @@
   /* --- Logo 图片样式调整 --- */
   #site-logo-img {
     height: 30px !important;   /* 你觉得合适的 Logo 高度 */
-    width: auto !important;
+    width: auto !important;    /* 宽度自动，保持比例 */
     max-height: 100%;
     object-fit: contain;
     vertical-align: middle; /* 对于 flex item 可能不是主要控制方式 */
@@ -36,12 +36,12 @@
 
   /* --- Topbar 网站标题 ("天秋的博客") 字体大小和颜色调整 --- */
   #topbar-title {
-    font-size: 1.5em !important; /* 你觉得合适的字体大小 */
-    margin-left: 0px !important; /* 因为 Logo 链接有了 margin-right */
+    font-size: 1.5em !important; /* 你期望的字体大小 */
+    margin-left: 0px !important; /* 因为 #site-logo-link 已经有了 margin-right，这里可以设为0或一个更小的值 */
     color: var(--topbar-text-color, var(--text-color)) !important;
   }
 
-  /* (可选) 如果上面的文字颜色变量在深色模式下不理想 */
+  /* (可选) 如果上面的文字颜色变量在深色模式下不理想，可以像这样专门为深色模式覆盖 */
   /*
   html[data-theme="dark"] #topbar-title {
     color: #f1f1f1 !important;
@@ -83,7 +83,7 @@
   /* Chirpy 主题中，#panel-wrapper 包裹了 <header id="topbar-wrapper"> 和 <main> */
   /* 我们需要调整 <main> (或者 #main-wrapper，如果它是 <main> 的直接父级且在 #panel-wrapper 内) 的上边距或上内边距 */
   /* 来控制文章列表与固定页眉的距离 */
-  
+
   /* 尝试减小 <main> 元素的上内边距 */
   main { /* 这是包裹文章列表和文章内容的主要语义标签 */
     padding-top: 0.5rem !important;  /* 关键：尝试减小这个值，比如 0.2rem, 10px, 甚至 0px */
@@ -96,15 +96,15 @@
   main article:first-child h2,
   main article:first-child h3,
   main article:first-child .post-title { /* 假设列表中的文章标题也有 .post-title 类 */
-    margin-top: 0.25rem !important; /* 尝试一个非常小的值，或者 0px */
+    margin-top: 0.15rem !important; /* 尝试一个非常小的值，或者 0px */
   }
-  
+
   /* --- 调整移动端单篇文章页面内文章大标题的字体大小 --- */
   /* (这个规则和上面调整列表标题的规则选择器可能需要区分，如果它们不一样的话) */
   /* 通常单篇文章页面的主标题是唯一的 h1[data-toc-skip] */
-  main h1[data-toc-skip] { 
-    font-size: 1.8rem !important; 
-    margin-top: 0.5rem !important; /* 这个是单篇文章页面大标题的上边距，也应该调小 */
+  main h1[data-toc-skip] {
+    font-size: 1.8rem !important;
+    margin-top: 0.15rem !important; /* 这个是单篇文章页面大标题的上边距，也应该调小 */
                                  /* 与上面 `main article:first-child h2/h3` 的值协调 */
   }
 
@@ -112,10 +112,15 @@
   /* (可选) 如果侧边栏 #sidebar 在 topbar 固定后显示位置不正确 */
   /*
   #sidebar {
-    padding-top: 56px !important; 
+    padding-top: 56px !important;
   }
   */
 
 } /* @media (max-width: 849px) 的结束大括号 */
 
 /* 如果你还想添加一些不区分屏幕尺寸的全局自定义样式，可以放在这个 @media 块的外部 */
+/* 例如：
+body {
+  font-family: "My Custom Font", sans-serif;
+}
+*/
