@@ -96,15 +96,15 @@
   main article:first-child h2,
   main article:first-child h3,
   main article:first-child .post-title { /* 假设列表中的文章标题也有 .post-title 类 */
-    margin-top: 0.15rem !important; /* 尝试一个非常小的值，或者 0px */
+    margin-top: 0.05rem !important; /* 尝试一个非常小的值，或者 0px */
   }
 
   /* --- 调整移动端单篇文章页面内文章大标题的字体大小 --- */
   /* (这个规则和上面调整列表标题的规则选择器可能需要区分，如果它们不一样的话) */
   /* 通常单篇文章页面的主标题是唯一的 h1[data-toc-skip] */
   main h1[data-toc-skip] {
-    font-size: 1.8rem !important;
-    margin-top: 0.15rem !important; /* 这个是单篇文章页面大标题的上边距，也应该调小 */
+    font-size: 1.6rem !important;
+    margin-top: 0.05rem !important; /* 这个是单篇文章页面大标题的上边距，也应该调小 */
                                  /* 与上面 `main article:first-child h2/h3` 的值协调 */
   }
 
