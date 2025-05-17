@@ -1,0 +1,28 @@
+---
+layout: compress
+---
+
+{% assign favicon_path = "/assets/img/favicons" | relative_url %}
+
+{
+  "name": "天秋的博客", // 你可以在这里或 _config.yml 中配置
+  "short_name": "天秋博客", // 你可以在这里或 _config.yml 中配置
+  "description": "你的博客描述", // 你可以在这里或 _config.yml 中配置
+  "icons": [
+    {
+      "src": "/assets/img/favicons/android-chrome-192x192.png", // 确保这些图标路径正确
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/favicons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+    // 可能还有其他尺寸的图标
+  ],
+  "theme_color": "#ffffff", // 主题颜色
+  "background_color": "#ffffff", // 背景颜色
+  "start_url": "/", // 启动 URL
+  "display": "standalone" // <--- 修改这里！从 fullscreen 或其他值改为 standalone
+}
