@@ -1,9 +1,9 @@
 /* assets/css/my-custom-styles.css */
 
-/* --- 默认情况下 (PC 端及更大屏幕) 隐藏为移动端添加的 Logo 和包裹容器 --- */
-/* 如果 PC 端 #topbar-title 应该回到原来的位置和样式，建议隐藏整个 .site-branding */
-.site-branding { /* 我们在 topbar.html 中包裹 Logo 和标题的那个 div */
-  display: none !important; /* 默认不显示这个容器 */
+/* --- 默认情况下 (PC 端及更大屏幕) --- */
+/* 隐藏为移动端添加的 Logo 和包裹它的容器 */
+.site-branding {
+  display: none !important;
 }
 
 /* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
@@ -11,38 +11,40 @@
 
   /* --- 让包裹 Logo 和标题的容器在移动端显示出来 --- */
   .site-branding {
-    display: flex !important; 
+    display: flex !important;
     align-items: center !important;
+    /* 如果需要它在 topbar 中占据更多空间，可以考虑 flex-grow: 1; */
+    /* 但通常 Chirpy 的 topbar 标题是居中的，需要小心调整 */
   }
 
   /* --- Logo 图片样式调整 --- */
   #site-logo-img {
-    height: 30px !important;   /* 设置 Logo 高度 */
-    width: auto !important;    /* 宽度自动，保持比例 */
-    max-height: 100%;          
-    object-fit: contain;       
-    vertical-align: middle;    
+    height: 30px !important;   /* 你觉得合适的 Logo 高度 */
+    width: auto !important;
+    max-height: 100%;
+    object-fit: contain;
+    vertical-align: middle; /* 对于 flex item 可能不是主要控制方式 */
   }
 
   /* 包裹 Logo 的 <a> 标签样式 */
   #site-logo-link {
-    line-height: 0;            
-    display: inline-flex;      
-    align-items: center;       
-    margin-right: 4px; /* 调整 Logo 和标题之间的间距，可以改为 2px, 0px 等 */
+    line-height: 0;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 4px; /* Logo 和右侧标题的间距，可以调整为 2px, 0px 等 */
   }
 
-  /* --- Topbar 网站标题字体大小和颜色调整 --- */
-  #topbar-title { /* 这是页眉上的网站标题 "天秋的博客" */
-    font-size: 1.5em !important; /* 你期望的字体大小 */
-    margin-left: 0px !important; /* 因为 #site-logo-link 已经有了 margin-right，这里可以设为0或一个更小的值 */
-    color: var(--topbar-text-color, var(--text-color)) !important; 
+  /* --- Topbar 网站标题 ("天秋的博客") 字体大小和颜色调整 --- */
+  #topbar-title {
+    font-size: 1.5em !important; /* 你觉得合适的字体大小 */
+    margin-left: 0px !important; /* 因为 Logo 链接有了 margin-right */
+    color: var(--topbar-text-color, var(--text-color)) !important;
   }
 
-  /* (可选) 如果上面的文字颜色变量在深色模式下不理想，可以像这样专门为深色模式覆盖 */
+  /* (可选) 如果上面的文字颜色变量在深色模式下不理想 */
   /*
   html[data-theme="dark"] #topbar-title {
-    color: #f1f1f1 !important; // 这是一个示例浅色文字，用于深色背景
+    color: #f1f1f1 !important;
   }
   */
 
@@ -52,14 +54,14 @@
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 56px !important; /* 页眉的固定高度 */
+    height: 56px !important; /* 页眉的固定高度，要和 body 的 padding-top 一致 */
     max-height: 56px !important;
     min-height: 56px !important;
-    padding: 0 1rem !important; /* 左右内边距，上下为0 */
+    padding: 0 1rem !important;
     margin: 0 !important;
     box-sizing: border-box !important;
-    background-color: var(--topbar-bg) !important; 
-    z-index: 1050 !important;
+    background-color: var(--topbar-bg) !important;
+    z-index: 1050 !important; /* 确保足够高 */
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
     display: flex !important;
     align-items: center !important;
@@ -77,19 +79,35 @@
     padding-top: 56px !important; /* 必须与 #topbar 的 height 一致 */
   }
 
-  /* --- 调整移动端单篇文章页面内文章大标题的上边距和字体大小 --- */
-  /* 确保 main 区域本身的上边距/内边距是合理的，以调整文章标题与固定页眉的距离 */
-  main { /* 或者 #panel-wrapper，根据你之前的HTML截图，#panel-wrapper 更准确 */
-    padding-top: 1rem !important; /* 这个值控制主要内容区域距离上方元素的间距，可以尝试 0.5rem, 1.5rem 等 */
-    /* margin-top: 0 !important; */ 
+  /* --- 调整主要内容区域与固定页眉的间距 --- */
+  /* Chirpy 主题中，#panel-wrapper 包裹了 <header id="topbar-wrapper"> 和 <main> */
+  /* 我们需要调整 <main> (或者 #main-wrapper，如果它是 <main> 的直接父级且在 #panel-wrapper 内) 的上边距或上内边距 */
+  /* 来控制文章列表与固定页眉的距离 */
+  
+  /* 尝试减小 <main> 元素的上内边距 */
+  main { /* 这是包裹文章列表和文章内容的主要语义标签 */
+    padding-top: 0.5rem !important;  /* 关键：尝试减小这个值，比如 0.2rem, 10px, 甚至 0px */
+    margin-top: 0 !important;      /* 同时确保它没有额外的 margin-top */
   }
 
-  main h1[data-toc-skip] { /* 或者你最终确定的更精确的选择器，如 .post-title */
-    font-size: 1.8rem !important; /* 移动端文章标题字体大小 */
-    margin-top: 0.5rem !important; /* 文章标题自身的上边距，也可以调整这个来改变与页眉的距离 */
-                                  /* 如果上面 main 的 padding-top 已经足够，这里可以设为0或一个很小的值 */
-    /* line-height: 1.3 !important; */ 
+  /* 并且，确保文章列表中的第一个文章标题自身没有过大的上边距 */
+  /* 这个选择器尝试选中主要内容区域内的第一个 <article> 元素内部的 h2 或 h3 标题 */
+  /* 如果你的文章列表项的标题不是 h2 或 h3，或者有特定类名，需要调整 */
+  main article:first-child h2,
+  main article:first-child h3,
+  main article:first-child .post-title { /* 假设列表中的文章标题也有 .post-title 类 */
+    margin-top: 0.25rem !important; /* 尝试一个非常小的值，或者 0px */
   }
+  
+  /* --- 调整移动端单篇文章页面内文章大标题的字体大小 --- */
+  /* (这个规则和上面调整列表标题的规则选择器可能需要区分，如果它们不一样的话) */
+  /* 通常单篇文章页面的主标题是唯一的 h1[data-toc-skip] */
+  main h1[data-toc-skip] { 
+    font-size: 1.8rem !important; 
+    margin-top: 0.5rem !important; /* 这个是单篇文章页面大标题的上边距，也应该调小 */
+                                 /* 与上面 `main article:first-child h2/h3` 的值协调 */
+  }
+
 
   /* (可选) 如果侧边栏 #sidebar 在 topbar 固定后显示位置不正确 */
   /*
@@ -101,8 +119,3 @@
 } /* @media (max-width: 849px) 的结束大括号 */
 
 /* 如果你还想添加一些不区分屏幕尺寸的全局自定义样式，可以放在这个 @media 块的外部 */
-/* 例如：
-body {
-  font-family: "My Custom Font", sans-serif;
-}
-*/
