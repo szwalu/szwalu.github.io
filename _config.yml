@@ -9,7 +9,7 @@ theme: jekyll-theme-chirpy
 lang: zh-CN
 
 # 网站使用的时区。请根据你所在位置修改，例如 "Asia/Shanghai"。
-timezone: Asia/Shanghai
+timezone: America/Los_Angeles
 
 # jekyll-seo-tag 插件的设置 (用于 SEO 优化) › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
@@ -30,12 +30,12 @@ url: "https://www.tqabc.com"
 # GitHub 相关设置
 github:
   # 你的 GitHub 用户名 (用于生成指向你 GitHub 主页的链接等)
-  username: szwalu # change to your GitHub username
+  # username: szwalu # change to your GitHub username
 
 # Twitter 相关设置
 twitter:
   # 你的 Twitter 用户名 (用于生成 Twitter Card 等)
-  username: szwalu # change to your Twitter username
+  # username: szwalu # change to your Twitter username
 
 # 社交信息设置
 social:
@@ -46,8 +46,8 @@ social:
   # 在页脚等处显示的社交链接列表。
   links:
     # 第一个链接通常用作版权所有者的链接。
-    - https://twitter.com/username # 更改为你的 Twitter 主页
-    - https://github.com/username # 更改为你的 GitHub 主页
+    # - https://twitter.com/username # 更改为你的 Twitter 主页
+    # - https://github.com/username # 更改为你的 GitHub 主页
     # 取消下面的注释 (#) 来添加更多社交链接
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
