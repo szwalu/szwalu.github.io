@@ -13,8 +13,8 @@
   .site-branding {
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
-    flex: 0 0 auto !important;
+    justify-content: center !important; /* 确保 Logo 和标题居中 */
+    flex: 0 0 auto !important; /* 防止过度拉伸 */
   }
 
   /* --- Logo 图片样式调整 --- */
@@ -58,35 +58,35 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important; /* 让中间元素居中 */
+    justify-content: space-between !important; /* 确保两端分布 */
     overflow: hidden !important;
-    position: relative !important; /* 允许绝对定位子项 */
   }
 
   /* 菜单图标（三条横线）居左 */
   #topbar-wrapper .menu-icon {
-    position: absolute !important;
-    left: 1rem !important;
+    margin-right: auto !important; /* 自动填充右侧空间，使菜单图标靠左 */
     display: flex !important;
     align-items: center !important;
+    order: 1 !important; /* 确保菜单图标最左 */
   }
 
   /* 标题和 Logo 居中 */
   #topbar-wrapper .site-branding {
-    margin: 0 auto !important;
-    display: flex !important;
-    align-items: center !important;
+    flex: 0 0 auto !important; /* 防止拉伸 */
+    order: 2 !important; /* 置于中间 */
+    text-align: center !important; /* 确保标题居中 */
   }
 
   /* 搜索图标居右 */
   #topbar-wrapper [aria-label="Search"] {
-    position: absolute !important;
-    right: 1rem !important;
+    margin-left: auto !important; /* 自动填充左侧空间，使搜索图标靠右 */
     display: flex !important;
     align-items: center !important;
+    order: 3 !important; /* 确保搜索图标最右 */
+    margin-right: 0 !important; /* 清除可能的右边距干扰 */
   }
 
-  /* 统一控制子元素高度 */
+  /* 确保 #topbar-wrapper 内的直接子元素高度受控 */
   #topbar-wrapper > * {
     margin: 0 !important;
     padding: 0 !important;
@@ -103,7 +103,7 @@
     padding-top: 0px !important;
     margin-top: 0px !important;
   }
-
+  
   main {
     padding-top: 0px !important;
     margin-top: 0px !important;
@@ -115,11 +115,11 @@
   main article:first-child .post-title {
     margin-top: 0px !important;
   }
-
-  /* --- 移动端文章页标题字体调整 --- */
-  main h1[data-toc-skip] {
+  
+  /* --- 调整移动端单篇文章页面内文章大标题的字体大小和上边距 --- */
+  main h1[data-toc-skip] { 
     font-size: 1.8rem !important;
     margin-top: 0.5rem !important;
   }
 
-}
+} /* @media (max-width: 849px) 的结束大括号 */
