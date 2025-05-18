@@ -1,100 +1,47 @@
 /* assets/css/my-custom-styles.css */
 
-/* --- 默认情况下 (PC 端及更大屏幕) --- */
-.site-branding {
-  display: none !important;
-}
-
-/* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
 @media (max-width: 849px) {
 
-  /* ... (所有关于 #topbar 固定, body padding-top, #topbar-title, #site-logo-img, .site-branding 的样式保持不变) ... */
-  /* 比如: */
-  #topbar {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 56px !important;
-    max-height: 56px !important;
-    min-height: 56px !important;
-    padding: 0 1rem !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    background-color: var(--topbar-bg) !important;
-    z-index: 1050 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
-
-  #topbar > * {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-
-  body {
-    padding-top: 56px !important; /* 必须与 #topbar 的 height 一致 */
-  }
-
-  #topbar-title {
-    font-size: 1.5em !important;
-    margin-left: 0px !important;
-    color: var(--topbar-text-color, var(--text-color)) !important;
-  }
-
-  #site-logo-img {
-    height: 30px !important;
-    width: auto !important;
-    max-height: 100%;
-    object-fit: contain;
-    vertical-align: middle;
-  }
-
-  #site-logo-link {
-    line-height: 0;
-    display: inline-flex;
-    align-items: center;
-    margin-right: 4px;
-  }
-
-  .site-branding { /* 这个要保留，让移动端显示 Logo 和标题 */
-    display: flex !important;
-    align-items: center !important;
-  }
-
-
-  /* ↓↓↓↓  这是我们这次重点修改和测试的部分 ↓↓↓↓ */
+  /* ... (你所有关于 #topbar 固定、body padding-top、页眉标题、Logo 的样式保持不变) ... */
 
   /* --- 调整主要内容区域与固定页眉的间距 --- */
-  
-  /* 方案：直接针对 #panel-wrapper 调整其上内边距 */
-  /* #panel-wrapper 是包裹 <header id="topbar-wrapper"> 和 <main> 的容器 */
-  /* 但因为 #topbar-wrapper 内部的 #topbar 是 fixed 定位，它不占据 #panel-wrapper 的空间了 */
-  /* 所以 #panel-wrapper 的起始位置应该紧贴 body 的 padding-top 之下 */
-  /* 我们尝试减小 #panel-wrapper 自身的 padding-top */
+
+  /* 1. 针对包裹 <main> 和 <header#topbar-wrapper> 的 #panel-wrapper (通常这个的 padding-top 应该为 0，因为 body 已经处理了) */
   #panel-wrapper {
-    padding-top: 0.5rem !important;  /* ★★★ 重点调整这个值！尝试 0.5rem, 0.2rem, 0px ★★★ */
-    /* margin-top: 0 !important; */ /* 通常 #panel-wrapper 不会有 margin-top */
-  }
-  
-  /* 同时，确保 main 和文章列表第一个标题的 margin-top 也是最小的 */
-  main {
-    padding-top: 0px !important; /* 将 main 内部的 padding-top 设为0，让间距主要由 #panel-wrapper 控制 */
+    padding-top: 0px !important;
     margin-top: 0px !important;
   }
 
-  main article:first-child h2,
-  main article:first-child h3,
-  main article:first-child .post-title {
-    margin-top: 0.5rem !important; /* 第一个文章标题与 main 顶部的间距，也可以尝试 0px */
+  /* 2. 针对 <main> 元素 */
+  main {
+    padding-top: 0.2rem !important;  /* ★★★ 尝试非常小的值，比如 0.2rem (约3px) 或直接 0px ★★★ */
+    margin-top: 0px !important;
+  }
+
+  /* 3. 针对 #post-list 容器 */
+  #post-list {
+    padding-top: 0px !important;   /* ★★★ 尝试将这个设为 0 ★★★ */
+    margin-top: 0px !important;    /* ★★★ 尝试将这个设为 0 ★★★ */
   }
   
+  /* 4. 针对文章列表中的第一个文章预览卡片 */
+  #post-list > article.card-wrapper:first-child { /* 根据你的截图，文章项是 article.card-wrapper，它本身可能被 a.post-preview 包裹 */
+    margin-top: 0.5rem !important; /* ★★★ 尝试一个较小的值，比如 0.2rem 或 0px ★★★ */
+    padding-top: 0px !important;   /* 有些卡片组件自身也可能有内边距 */
+  }
+  
+  /* 如果 .post-preview 是更外层的包裹，也尝试调整它 */
+  #post-list > a.post-preview:first-child {
+    margin-top: 0.5rem !important; /* ★★★ 尝试一个较小的值，比如 0.2rem 或 0px ★★★ */
+    padding-top: 0px !important;
+  }
+
+
   /* --- （保持不变）调整移动端单篇文章页面内文章大标题的字体大小和上边距 --- */
+  /* (这部分与首页列表间距无关，但保持之前的优化) */
   main h1[data-toc-skip] { 
     font-size: 1.8rem !important; 
-    margin-top: 0.5rem !important; /* 单篇文章页标题的上边距，也应较小 */
+    margin-top: 0.5rem !important; /* 这个也应该较小 */
   }
 
 } /* @media (max-width: 849px) 的结束大括号 */
