@@ -10,11 +10,10 @@
 @media (max-width: 849px) {
 
   /* --- 让包裹 Logo 和标题的容器在移动端显示出来 --- */
-  .site-branding {
+  .site-branding { /* 这是 .site-branding 在移动端显示时的通用规则 */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important; /* 确保 Logo 和标题在其容器内部居中 */
-    /* flex: 0 0 auto !important; */ /* 此处 flex 属性对于绝对定位的元素不是必需的 */
   }
 
   /* --- Logo 图片样式调整 --- */
@@ -72,11 +71,12 @@
 
   /* 菜单图标（三条横线）居左 */
   #topbar-wrapper .menu-icon {
-    /* margin-right: auto !important; */ /* 当父容器使用 space-between 且此元素 order 为最小时，此项不是必需的 */
     display: flex !important;
     align-items: center !important;
     order: 1 !important; /* 确保在 Flex 流的最左侧 */
-    flex-shrink: 0; /* 防止图标被压缩 */
+    margin: 0 !important; /* 重置所有外边距 */
+    padding: 0 !important; /* 重置所有内边距 */
+    flex-shrink: 0 !important; /* 防止图标被压缩 */
   }
 
   /* 博客标题和 Logo 居中 */
@@ -87,20 +87,17 @@
     top: 50% !important; /* 垂直居中 */
     transform: translate(-50%, -50%) !important; /* 精确居中 */
     width: auto !important; /* 宽度自适应内容 */
-    /* order: 2 !important; */ /* 对于绝对定位的元素，order 不影响其最终布局 */
-    /* flex: 0 0 auto !important; */ /* 对于绝对定位的元素，flex 属性不适用 */
-    /* text-align: center !important; */ /* .site-branding 内部已通过 flex 实现居中 */
+    /* order 和 flex 属性对于绝对定位的元素不适用此处的布局控制 */
   }
 
-  /* 搜索图标居右 */
-  #topbar-wrapper [aria-label="Search"] { /* 或者使用更精确的类名，例如 .search-icon-selector */
+  /* 搜索图标（放大镜）居右 */
+  /* 重要：请再次确认 [aria-label="Search"] 是否是您 HTML 中放大镜搜索图标的正确且唯一的选择器 */
+  #topbar-wrapper [aria-label="Search"] {
     display: flex !important;
     align-items: center !important;
-    order: 3 !important; /* 确保在 Flex 流的最右侧 */
-    margin-left: auto !important; /* 强制将其推到最右边 */
-    margin-right: 0 !important; /* 清除右边距 */
-    padding-left: 0 !important; /* 清除左内边距，以防万一 */
-    padding-right: 0 !important; /* 清除右内边距 */
+    order: 3 !important; /* 确保在 Flex 流的最后（相对于 menu-icon 的 order: 1）*/
+    margin: 0 !important; /* 关键：移除所有外边距，包括 auto。依赖父元素的 justify-content。*/
+    padding: 0 !important; /* 重置所有内边距，以防万一 */
     flex-shrink: 0 !important; /* 防止图标被压缩 */
   }
 
