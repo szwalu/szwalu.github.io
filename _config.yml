@@ -170,8 +170,17 @@ pwa:
     deny_paths:
       # - "/example"
 
+plugins:
+  - jekyll-paginate-v2
+# 添加或确认 jekyll-paginate-v2 的配置
+pagination:
+  enabled: true
+  per_page: 10   # 你希望每页显示的文章数量
+  permalink: /page/:num/ # 分页页面的URL格式
+  collection: 'posts'    # 默认是对 'posts' 集合进行分页
+
 # 首页/列表页每页显示的文章数量
-paginate: 10
+# paginate: 10
 
 # 网站的基础路径 (子目录)。如果网站部署在根目录, 则留空 ""。
 # 注意: 这个设置通常建议放在 `url` 下方, 但这里放在了后面。
