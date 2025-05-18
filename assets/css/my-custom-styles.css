@@ -1,22 +1,56 @@
 /* assets/css/my-custom-styles.css */
 
-/* --- 默认情况下 (PC 端及更大屏幕) --- */
-/* 隐藏为移动端添加的 Logo 和包裹它的容器 */
-.site-branding {
-  display: none !important;
-}
-
 /* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
 @media (max-width: 849px) {
 
-  /* --- 让包裹 Logo 和标题的容器在移动端显示出来 --- */
-  .site-branding { /* 这是 .site-branding 在移动端显示时的通用规则 */
+  /* 确保 #topbar (父容器) 正确应用 Flex 属性 */
+  /* Bootstrap 的 d-flex 和 justify-content-between 应该已经处理了这些， */
+  /* 但我们可以显式地再次声明以确保覆盖或强调 */
+  #topbar {
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important; /* 确保 Logo 和标题在其容器内部居中 */
+    justify-content: space-between !important;
+    align-items: center !important; /* 垂直居中所有子项 */
+    width: 100% !important;
+    height: 100% !important;
   }
 
-  /* --- Logo 图片样式调整 --- */
+  /* 菜单按钮（三条横线）居左 */
+  #sidebar-trigger { /* 使用 ID 选择器 */
+    order: 1 !important; /* 最左边 */
+    margin: 0 !important;
+    padding: 0 0.25rem !important; /* 可以稍微调整内边距以优化视觉 */
+    display: inline-flex !important; /* 确保其内容也良好对齐 */
+    align-items: center !important;
+  }
+
+  /* 博客标题和 Logo 居中 */
+  .site-branding { /* 使用类选择器 */
+    /* 确保它在移动端是 display: flex 以便内部元素对齐 */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    /* 绝对定位实现居中 */
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: auto !important; /* 宽度自适应内容 */
+    /* order: 2; */ /* 对于绝对定位元素，order 不直接影响其在 absolute 布局中的位置，但为了逻辑清晰可以保留 */
+  }
+
+  /* 搜索按钮（放大镜）居右 */
+  #search-trigger { /* 使用 ID 选择器 */
+    order: 3 !important; /* 最右边 */
+    margin: 0 !important;
+    padding: 0 0.25rem !important; /* 可以稍微调整内边距以优化视觉 */
+    display: inline-flex !important; /* 确保其内容也良好对齐 */
+    align-items: center !important;
+  }
+
+  /* --- 以下是您之前 CSS 中其他部分，保持不变 --- */
+
+  /* Logo 图片样式调整 */
   #site-logo-img {
     height: 30px !important;
     width: auto !important;
@@ -30,111 +64,62 @@
     line-height: 0;
     display: inline-flex;
     align-items: center;
-    margin-right: 4px;
+    margin-right: 4px; /* 如果Logo和标题之间需要间距 */
   }
 
-  /* --- Topbar 网站标题 ("天秋的博客") 字体大小和颜色调整 --- */
+  /* Topbar 网站标题字体大小和颜色调整 */
   #topbar-title {
     font-size: 1.5em !important;
-    margin-left: 0px !important;
+    /* margin-left: 0px !important; */ /* 如果Logo在左，标题在右，可能需要这个 */
     color: var(--topbar-text-color, var(--text-color)) !important;
   }
 
-  /* --- 固定 Topbar 的核心样式 --- */
+  /* 固定 Topbar 的核心样式 */
   #topbar-wrapper {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 56px !important;
+    height: 56px !important; /* 您之前设置的固定高度 */
     max-height: 56px !important;
     min-height: 56px !important;
-    padding: 0 1rem !important; /* 页眉左右内边距 */
+    padding: 0 1rem !important; /* 页眉左右内边距，这会影响 #topbar 的可用宽度 */
     margin: 0 !important;
     box-sizing: border-box !important;
     background-color: var(--topbar-bg) !important;
     z-index: 1050 !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
-    display: flex !important;
+    display: flex !important; /* #topbar-wrapper 也是 flex，使其子元素 #topbar 能够良好对齐 */
     align-items: center !important;
     overflow: hidden !important;
   }
 
-  /* 创建一个内部容器来控制布局 */
-  #topbar-wrapper > .topbar-inner {
-    display: flex !important;
-    align-items: center !important; /* 垂直居中菜单和搜索图标 */
-    width: 100% !important;
-    height: 100% !important; /* 确保内部容器占满高度 */
-    justify-content: space-between !important; /* 将菜单图标和搜索图标分别推向两侧 */
-  }
+  /* 确保 #topbar-wrapper 内的直接子元素高度受控 (主要是 #topbar) */
+  /* #topbar-wrapper > * { 这个规则可能过于宽泛，我们直接控制 #topbar 即可 } */
 
-  /* 菜单图标（三条横线）居左 */
-  #topbar-wrapper .menu-icon {
-    display: flex !important;
-    align-items: center !important;
-    order: 1 !important; /* 确保在 Flex 流的最左侧 */
-    margin: 0 !important; /* 重置所有外边距 */
-    padding: 0 !important; /* 重置所有内边距 */
-    flex-shrink: 0 !important; /* 防止图标被压缩 */
-  }
-
-  /* 博客标题和 Logo 居中 */
-  #topbar-wrapper .site-branding {
-    /* display: flex, align-items: center, justify-content: center 由 .site-branding 通用规则提供 */
-    position: absolute !important; /* 绝对定位，使其脱离 Flex 流 */
-    left: 50% !important; /* 水平居中 */
-    top: 50% !important; /* 垂直居中 */
-    transform: translate(-50%, -50%) !important; /* 精确居中 */
-    width: auto !important; /* 宽度自适应内容 */
-    /* order 和 flex 属性对于绝对定位的元素不适用此处的布局控制 */
-  }
-
-  /* 搜索图标（放大镜）居右 */
-  /* 重要：请再次确认 [aria-label="Search"] 是否是您 HTML 中放大镜搜索图标的正确且唯一的选择器 */
-  #topbar-wrapper [aria-label="Search"] {
-    display: flex !important;
-    align-items: center !important;
-    order: 3 !important; /* 确保在 Flex 流的最后（相对于 menu-icon 的 order: 1）*/
-    margin: 0 !important; /* 关键：移除所有外边距，包括 auto。依赖父元素的 justify-content。*/
-    padding: 0 !important; /* 重置所有内边距，以防万一 */
-    flex-shrink: 0 !important; /* 防止图标被压缩 */
-  }
-
-  /* 确保 #topbar-wrapper 内的直接子元素高度受控 (主要是 .topbar-inner) */
-  #topbar-wrapper > * {
-    margin: 0 !important;
-    padding: 0 !important;
-    max-height: 100% !important;
-  }
 
   /* --- 调整 Body 的 padding-top --- */
   body {
-    padding-top: 56px !important;
+    padding-top: 56px !important; /* 与 #topbar-wrapper 高度一致 */
   }
 
-  /* --- 调整主要内容区域与固定页眉的间距 --- */
+  /* (其他 main, panel-wrapper 等样式保持不变) */
   #panel-wrapper {
     padding-top: 0px !important;
     margin-top: 0px !important;
   }
-  
   main {
     padding-top: 0px !important;
     margin-top: 0px !important;
   }
-
   #post-list > article.card-wrapper:first-child,
   main article:first-child h2,
   main article:first-child h3,
   main article:first-child .post-title {
     margin-top: 0px !important;
   }
-  
-  /* --- 调整移动端单篇文章页面内文章大标题的字体大小和上边距 --- */
-  main h1[data-toc-skip] {  
+  main h1[data-toc-skip] {
     font-size: 1.8rem !important;
     margin-top: 0.5rem !important;
   }
-
-} /* @media (max-width: 849px) 的结束大括号 */
+}
