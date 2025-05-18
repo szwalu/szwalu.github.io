@@ -53,7 +53,7 @@
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100% !important;
+    width: 100 !important;
     height: 56px !important; /* 页眉的固定高度 */
     max-height: 56px !important;
     min-height: 56px !important;
@@ -80,15 +80,13 @@
   }
 
   /* --- 调整主要内容区域与固定页眉的间距 --- */
-  /* 我们尝试减小 #panel-wrapper (包裹主要内容和之前 topbar-wrapper 的容器) 的上内边距或上外边距 */
-  /* 因为 body 的 padding-top 已经为固定的 #topbar 留出了空间，*/
-  /* #panel-wrapper 应该紧贴在这个空间之下开始。*/
+  /* 减少 #panel-wrapper 的上内边距和上外边距 */
   #panel-wrapper {
-    padding-top: 0.5rem !important;  /* ★★★ 重点调整这个值！尝试 0.5rem, 0.2rem, 0px ★★★ */
-    margin-top: 0px !important;   /* ★★★ 确保这个也为 0 ★★★ */
+    padding-top: 0px !important;  /* 减少到 0px 以消除多余间距 */
+    margin-top: 0px !important;   /* 确保无额外外边距 */
   }
   
-  /* 同时，也确保 main 和文章列表第一个标题的 margin-top 是最小的，以防万一 */
+  /* 确保 main 和文章列表第一个标题的 margin-top 是最小的 */
   main {
     padding-top: 0px !important; 
     margin-top: 0px !important;
@@ -98,13 +96,13 @@
   main article:first-child h2, /* 针对文章列表第一个标题 (如果是h2) */
   main article:first-child h3, /* 针对文章列表第一个标题 (如果是h3) */
   main article:first-child .post-title { /* 针对文章列表第一个标题 (如果有 .post-title 类) */
-    margin-top: 0.2rem !important; /* 保留一点点或设为 0px */
+    margin-top: 0px !important; /* 设为 0px 以贴近页眉 */
   }
   
   /* --- 调整移动端单篇文章页面内文章大标题的字体大小和上边距 --- */
   main h1[data-toc-skip] { 
     font-size: 1.8rem !important; 
-    margin-top: 0.5rem !important; /* 单篇文章页标题的上边距，也应较小，可以和 #panel-wrapper 的 padding-top 协调 */
+    margin-top: 0.5rem !important; /* 保持标题与内容的适当间距 */
   }
 
   /* (可选) 如果侧边栏 #sidebar 在 topbar 固定后显示位置不正确 */
