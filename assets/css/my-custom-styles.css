@@ -13,6 +13,8 @@
   .site-branding {
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important; /* 确保 Logo 和标题居中 */
+    flex: 0 0 auto !important; /* 防止过度拉伸 */
   }
 
   /* --- Logo 图片样式调整 --- */
@@ -45,7 +47,7 @@
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 56px !important; /* 强制限制高度为 56px */
+    height: 56px !important;
     max-height: 56px !important;
     min-height: 56px !important;
     padding: 0 1rem !important;
@@ -56,8 +58,15 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    overflow: hidden !important; /* 防止子元素溢出 */
+    justify-content: center !important; /* 整体内容居中 */
+    overflow: hidden !important;
+  }
+
+  /* 确保搜索图标居右 */
+  #topbar-wrapper .search-icon {
+    margin-left: auto !important; /* 自动填充左侧空间，使搜索图标靠右 */
+    display: flex !important;
+    align-items: center !important;
   }
 
   /* 确保 #topbar-wrapper 内的直接子元素高度受控 */
@@ -69,7 +78,7 @@
 
   /* --- 调整 Body 的 padding-top --- */
   body {
-    padding-top: 56px !important; /* 与 #topbar-wrapper 高度匹配 */
+    padding-top: 56px !important;
   }
 
   /* --- 调整主要内容区域与固定页眉的间距 --- */
