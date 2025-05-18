@@ -83,6 +83,7 @@
     display: flex !important;
     align-items: center !important;
     order: 3 !important; /* 确保搜索图标最右 */
+    margin-right: 0 !important; /* 清除可能的右边距干扰 */
   }
 
   /* 标题和 Logo 居中 */
