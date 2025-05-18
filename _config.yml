@@ -106,6 +106,10 @@ cdn:
 # 侧边栏显示的头像图片。支持本地路径或 CORS 资源 URL。
 avatar: /assets/img/my_avatar.png
 
+# 新增这两行，明确禁止在网站标题前后显示头像
+avatar_before_title: false
+avatar_after_title: false
+
 # 网站范围的社交预览图片 URL (用于 SEO 的 `og:image` meta 标签)。
 # 可以在文章的 Front Matter 中用 `page.image` 覆盖。
 social_preview_image: # string, local or CORS resources
