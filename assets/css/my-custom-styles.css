@@ -58,22 +58,38 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important; /* 使用 space-between 实现左右分布 */
     overflow: hidden !important;
   }
 
-  /* 确保菜单图标（三条横线）居左 */
+  /* 容器化布局：菜单图标居左，标题及 Logo 居中，搜索图标居右 */
+  #topbar-wrapper > .topbar-content {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important; /* 菜单和搜索分列两端 */
+    width: 100% !important;
+  }
+
+  /* 菜单图标（三条横线）居左 */
   #topbar-wrapper .menu-icon {
     margin-right: auto !important; /* 自动填充右侧空间，使菜单图标靠左 */
     display: flex !important;
     align-items: center !important;
+    order: 1 !important; /* 确保菜单图标最左 */
   }
 
-  /* 确保搜索图标居右 */
+  /* 搜索图标居右 */
   #topbar-wrapper .search-icon {
     margin-left: auto !important; /* 自动填充左侧空间，使搜索图标靠右 */
     display: flex !important;
     align-items: center !important;
+    order: 3 !important; /* 确保搜索图标最右 */
+  }
+
+  /* 标题和 Logo 居中 */
+  #topbar-wrapper .site-branding {
+    flex: 0 0 auto !important; /* 防止拉伸 */
+    order: 2 !important; /* 置于中间 */
+    text-align: center !important; /* 确保标题居中 */
   }
 
   /* 确保 #topbar-wrapper 内的直接子元素高度受控 */
