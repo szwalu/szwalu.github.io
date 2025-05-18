@@ -93,13 +93,15 @@
   }
 
   /* 搜索图标居右 */
-  #topbar-wrapper [aria-label="Search"] {
-    /* margin-left: auto !important; */ /* 当父容器使用 space-between 且此元素 order 为最大时，此项不是必需的 */
+  #topbar-wrapper [aria-label="Search"] { /* 或者使用更精确的类名，例如 .search-icon-selector */
     display: flex !important;
     align-items: center !important;
     order: 3 !important; /* 确保在 Flex 流的最右侧 */
-    margin-right: 0 !important; /* 清除可能的右边距干扰 */
-    flex-shrink: 0; /* 防止图标被压缩 */
+    margin-left: auto !important; /* 强制将其推到最右边 */
+    margin-right: 0 !important; /* 清除右边距 */
+    padding-left: 0 !important; /* 清除左内边距，以防万一 */
+    padding-right: 0 !important; /* 清除右内边距 */
+    flex-shrink: 0 !important; /* 防止图标被压缩 */
   }
 
   /* 确保 #topbar-wrapper 内的直接子元素高度受控 (主要是 .topbar-inner) */
