@@ -13,8 +13,8 @@
   .site-branding {
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important; /* 确保 Logo 和标题居中 */
-    flex: 0 0 auto !important; /* 防止过度拉伸 */
+    justify-content: center !important; /* 确保 Logo 和标题在其容器内部居中 */
+    /* flex: 0 0 auto !important; */ /* 此处 flex 属性对于绝对定位的元素不是必需的 */
   }
 
   /* --- Logo 图片样式调整 --- */
@@ -50,7 +50,7 @@
     height: 56px !important;
     max-height: 56px !important;
     min-height: 56px !important;
-    padding: 0 1rem !important;
+    padding: 0 1rem !important; /* 页眉左右内边距 */
     margin: 0 !important;
     box-sizing: border-box !important;
     background-color: var(--topbar-bg) !important;
@@ -58,54 +58,51 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
     display: flex !important;
     align-items: center !important;
-<<<<<<< HEAD
     overflow: hidden !important;
   }
 
   /* 创建一个内部容器来控制布局 */
   #topbar-wrapper > .topbar-inner {
     display: flex !important;
-    align-items: center !important;
+    align-items: center !important; /* 垂直居中菜单和搜索图标 */
     width: 100% !important;
-    justify-content: space-between !important; /* 确保两端分布 */
-=======
-    justify-content: space-between !important; /* 确保两端分布 */
-    overflow: hidden !important;
->>>>>>> 371fc9cbea66e8133623561245f885ed8aac3c48
+    height: 100% !important; /* 确保内部容器占满高度 */
+    justify-content: space-between !important; /* 将菜单图标和搜索图标分别推向两侧 */
   }
 
   /* 菜单图标（三条横线）居左 */
   #topbar-wrapper .menu-icon {
-    margin-right: auto !important; /* 自动填充右侧空间，使菜单图标靠左 */
+    /* margin-right: auto !important; */ /* 当父容器使用 space-between 且此元素 order 为最小时，此项不是必需的 */
     display: flex !important;
     align-items: center !important;
-    order: 1 !important; /* 确保菜单图标最左 */
+    order: 1 !important; /* 确保在 Flex 流的最左侧 */
+    flex-shrink: 0; /* 防止图标被压缩 */
   }
 
-  /* 标题和 Logo 居中 */
+  /* 博客标题和 Logo 居中 */
   #topbar-wrapper .site-branding {
-    flex: 0 0 auto !important; /* 防止拉伸 */
-    order: 2 !important; /* 置于中间 */
-    text-align: center !important; /* 确保标题居中 */
-<<<<<<< HEAD
-    position: absolute !important; /* 绝对定位以居中 */
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: auto !important; /* 防止宽度影响 */
-=======
->>>>>>> 371fc9cbea66e8133623561245f885ed8aac3c48
+    /* display: flex, align-items: center, justify-content: center 由 .site-branding 通用规则提供 */
+    position: absolute !important; /* 绝对定位，使其脱离 Flex 流 */
+    left: 50% !important; /* 水平居中 */
+    top: 50% !important; /* 垂直居中 */
+    transform: translate(-50%, -50%) !important; /* 精确居中 */
+    width: auto !important; /* 宽度自适应内容 */
+    /* order: 2 !important; */ /* 对于绝对定位的元素，order 不影响其最终布局 */
+    /* flex: 0 0 auto !important; */ /* 对于绝对定位的元素，flex 属性不适用 */
+    /* text-align: center !important; */ /* .site-branding 内部已通过 flex 实现居中 */
   }
 
   /* 搜索图标居右 */
   #topbar-wrapper [aria-label="Search"] {
-    margin-left: auto !important; /* 自动填充左侧空间，使搜索图标靠右 */
+    /* margin-left: auto !important; */ /* 当父容器使用 space-between 且此元素 order 为最大时，此项不是必需的 */
     display: flex !important;
     align-items: center !important;
-    order: 3 !important; /* 确保搜索图标最右 */
+    order: 3 !important; /* 确保在 Flex 流的最右侧 */
     margin-right: 0 !important; /* 清除可能的右边距干扰 */
+    flex-shrink: 0; /* 防止图标被压缩 */
   }
 
-  /* 确保 #topbar-wrapper 内的直接子元素高度受控 */
+  /* 确保 #topbar-wrapper 内的直接子元素高度受控 (主要是 .topbar-inner) */
   #topbar-wrapper > * {
     margin: 0 !important;
     padding: 0 !important;
@@ -136,7 +133,7 @@
   }
   
   /* --- 调整移动端单篇文章页面内文章大标题的字体大小和上边距 --- */
-  main h1[data-toc-skip] { 
+  main h1[data-toc-skip] {  
     font-size: 1.8rem !important;
     margin-top: 0.5rem !important;
   }
