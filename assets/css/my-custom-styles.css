@@ -64,26 +64,27 @@
 
   /* 菜单图标（三条横线）居左 */
   #topbar-wrapper .menu-icon {
-    margin-right: auto !important; /* 自动填充右侧空间，使菜单图标靠左 */
+    order: 1 !important;
+    margin-right: auto !important;
     display: flex !important;
     align-items: center !important;
-    order: 1 !important; /* 确保菜单图标最左 */
   }
 
   /* 标题和 Logo 居中 */
   #topbar-wrapper .site-branding {
-    flex: 0 0 auto !important; /* 防止拉伸 */
-    order: 2 !important; /* 置于中间 */
-    text-align: center !important; /* 确保标题居中 */
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    margin: 0 auto !important;
+    text-align: center !important;
   }
 
   /* 搜索图标居右 */
   #topbar-wrapper [aria-label="Search"] {
-    margin-left: auto !important; /* 自动填充左侧空间，使搜索图标靠右 */
+    order: 3 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
     display: flex !important;
     align-items: center !important;
-    order: 3 !important; /* 确保搜索图标最右 */
-    margin-right: 0 !important; /* 清除可能的右边距干扰 */
   }
 
   /* 确保 #topbar-wrapper 内的直接子元素高度受控 */
