@@ -1,123 +1,122 @@
 /* assets/css/my-custom-styles.css */
 
 /* --- 默认样式 (应用于桌面端 / 屏幕宽度 > 849px) --- */
-/* 在 PC 端默认隐藏 Logo 链接 (从而隐藏 Logo 图片) */
+/* 在 PC 端默认隐藏仅为移动端设计的 Logo 链接 (及其内部图片) */
 #site-logo-link {
   display: none !important;
 }
 
-/* 如果您希望在 PC 端 .site-branding (通常包含网站标题) 有特定样式，
-   可以在这里添加。目前，PC 端会使用 Chirpy 主题的默认 .site-branding 样式。
-   如果您只是想隐藏PC端的图片logo，上面的规则应该就够了。
+/* 如果您希望PC端的网站标题（通常是 #topbar-title 或 .site-title 内的文本）
+   有特定样式，可以在这里添加。目前它会使用Chirpy主题的默认样式。
 */
 
 
 /* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
 @media (max-width: 849px) {
 
-  /* 确保 #topbar (父容器) 正确应用 Flex 属性 */
-  #topbar {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important; /* 垂直居中所有子项 */
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  /* 菜单按钮（三条横线）居左 */
-  #sidebar-trigger { /* 使用 ID 选择器 */
-    order: 1 !important; /* 最左边 */
-    margin: 0 !important;
-    padding: 0 0.25rem !important;
-    display: inline-flex !important;
-    align-items: center !important;
-  }
-
-  /* 博客标题和 Logo 居中 (移动端) */
-  .site-branding { /* 使用类选择器 */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: auto !important;
-  }
-
-  /* 搜索按钮（放大镜）居右 */
-  #search-trigger { /* 使用 ID 选择器 */
-    order: 3 !important; /* 最右边 */
-    margin: 0 !important;
-    padding: 0 0.25rem !important;
-    display: inline-flex !important;
-    align-items: center !important;
-  }
-
-  /* Logo 图片样式调整 */
-  #site-logo-img {
-    height: 30px !important;
-    width: auto !important;
-    max-height: 100%;
-    object-fit: contain;
-    vertical-align: middle;
-    /* 注意：这里的 display 属性由其父元素 #site-logo-link 控制 */
-  }
-
-  /* 包裹 Logo 的 <a> 标签样式 (移动端使其可见) */
-  #site-logo-link {
-    display: inline-flex !important; /* 在移动端显示 Logo 链接 */
-    align-items: center;
-    line-height: 0; /* 通常用于包含图片的链接，以消除多余的行高空间 */
-    margin-right: 4px; /* 如果Logo和标题（如果同时显示的话）之间需要间距 */
-  }
-
-  /* Topbar 网站标题字体大小和颜色调整 */
-  #topbar-title {
-    font-size: 1.5em !important;
-    color: var(--topbar-text-color, var(--text-color)) !important;
-  }
-
-  /* 固定 Topbar 的核心样式 */
+  /* 1. 固定页眉容器 (#topbar-wrapper) */
   #topbar-wrapper {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 56px !important;
-    max-height: 56px !important;
-    min-height: 56px !important;
-    padding: 0 1rem !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    background-color: var(--topbar-bg) !important;
-    z-index: 1050 !important;
+    height: 56px !important; /* 您期望的固定页眉高度 */
+    padding: 0 1rem !important; /* 页眉左右的内边距 */
+    background-color: var(--topbar-bg, #ffffff) !important; /* 页眉背景色，带备用值 */
+    z-index: 1050 !important; /* 确保在最上层 */
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+    display: flex !important; /* 使用 flex 布局其直接子元素 (通常是 #topbar) */
+    align-items: center !important; /* 垂直居中子元素 */
+    box-sizing: border-box !important;
+  }
+
+  /* 2. 为 body 添加上边距，防止内容被固定页眉遮挡 */
+  body {
+    padding-top: 56px !important; /* 必须与 #topbar-wrapper 的高度一致 */
+  }
+
+  /* 3. 页眉内部容器 (#topbar) 的样式 */
+  /* #topbar 通常是 #sidebar-trigger, .site-branding, #search-trigger 的直接父容器 */
+  #topbar {
+    display: flex !important;
+    justify-content: space-between !important; /* 两端对齐：菜单键最左，搜索键最右 */
+    align-items: center !important; /* 垂直居中所有项 */
+    width: 100% !important; /* 占据 #topbar-wrapper 内的全部可用宽度 */
+    height: 100% !important;
+    position: relative; /* 为 .site-branding 的绝对定位提供上下文参考 */
+  }
+
+  /* 4. 页眉内部元素的布局 */
+  /* 菜单按钮（左侧） */
+  #sidebar-trigger {
+    order: 1; /* 明确顺序，虽然默认可能就是1 */
+    padding: 0 !important;
+    margin: 0 !important;
+    /* flex: 0 0 auto; (可选，防止其缩放) */
+  }
+
+  /* 网站品牌区域（Logo 和/或 标题，居中） */
+  .site-branding {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important; /* 精确居中 */
     display: flex !important;
     align-items: center !important;
-    overflow: hidden !important;
+    justify-content: center; /* 如果内部有多个元素，让它们也居中 */
+    /* width: auto; (宽度由内容决定) */
+    /* order: 2; (对于绝对定位元素，order 不影响其在 #topbar flex流中的位置) */
   }
 
-  /* --- 调整 Body 的 padding-top --- */
-  body {
-    padding-top: 56px !important; /* 与 #topbar-wrapper 高度一致 */
+  /* 搜索按钮（右侧） */
+  #search-trigger {
+    order: 3; /* 明确顺序 */
+    padding: 0 !important;
+    margin: 0 !important;
+    /* flex: 0 0 auto; (可选) */
   }
 
-  /* (其他 main, panel-wrapper 等样式保持不变) */
-  #panel-wrapper {
-    padding-top: 0px !important;
-    margin-top: 0px !important;
+  /* 5. 移动端 Logo 的样式 */
+  /* Logo 的链接容器，在移动端设为可见 */
+  #site-logo-link {
+    display: inline-flex !important; /* 使其可见并表现为 flex 容器 */
+    align-items: center;
+    line-height: 0; /* 消除图片链接可能的多余行高 */
+    /* margin-right: 8px; */ /* 如果您希望Logo和文字标题并排显示，并需要间距 */
   }
+
+  /* Logo 图片本身 */
+  #site-logo-img {
+    height: 30px !important; /* 您期望的Logo高度 */
+    width: auto !important;  /* 宽度自适应 */
+    vertical-align: middle; /* 确保图片垂直对齐良好 */
+  }
+
+  /* 6. 移动端网站标题文字的样式 (如果它在 .site-branding 中且需要显示) */
+  /* 如果您在移动端只想要 Logo，不想要文字标题，可以取消下面这行注释 */
+  /* .site-branding #topbar-title { display: none !important; } */
+
+  /* 如果您希望 Logo 和文字标题同时在移动端 .site-branding 中显示，可以调整文字样式 */
+   .site-branding #topbar-title {
+    font-size: 1.2em !important; /* 示例大小，请按需调整 */
+    color: var(--topbar-text-color, var(--text-color)) !important;
+    margin-left: 8px; /* Logo 和文字之间的间距 (如果并排显示) */
+  }
+
+  /* --- 页面主体内容区域可能需要的边距调整 (来自您之前的CSS，通常是好的) --- */
+  #panel-wrapper,
   main {
-    padding-top: 0px !important;
+    padding-top: 0px !important; /* 因为 body 已经有了 padding-top */
     margin-top: 0px !important;
   }
+
   #post-list > article.card-wrapper:first-child,
   main article:first-child h2,
   main article:first-child h3,
   main article:first-child .post-title {
     margin-top: 0px !important;
   }
+
   main h1[data-toc-skip] {
     font-size: 1.8rem !important;
     margin-top: 0.5rem !important;
