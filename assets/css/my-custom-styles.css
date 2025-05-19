@@ -121,7 +121,76 @@
     font-size: 1.8rem !important;
     margin-top: 0.5rem !important;
   }
-}
+
+  /* --- 修改：调整文章列表项中图片和文字的顺序及宽度 (移动端) --- */
+  #post-list .post-preview {
+    display: flex !important;
+    flex-direction: row !important; /* 确保是横向排列 */
+    align-items: flex-start; /* 顶部对齐，如果内容高度不一，可以试试 center */
+    /* border: 1px solid red; */ /* 临时边框用于调试 */
+  }
+
+  /* 图片列 */
+  #post-list .post-preview > .col-md-5 {
+    order: 2 !important; /* 图片在右 */
+    flex-basis: 33% !important;  /* 图片占据大约1/3宽度，您可以微调 */
+    max-width: 33% !important;
+    flex-shrink: 0 !important; /* 防止图片列被压缩 */
+    margin-left: 0.75rem !important; /* 图片与文字之间的间距 */
+    padding: 0 !important; /* 移除列的内边距，让图片更贴近列的边缘 */
+    box-sizing: border-box !important;
+  }
+
+  /* 文字内容列 */
+  #post-list .post-preview > div[class*="col-md-"]:not(.col-md-5) {
+    order: 1 !important; /* 文字在左 */
+    flex-basis: calc(67% - 0.75rem) !important; /* 文字占据剩余宽度减去图片间距，您可以微调 */
+    max-width: calc(67% - 0.75rem) !important;
+    padding: 0 !important; /* 移除列的内边距，让文字更贴近列的边缘 */
+    box-sizing: border-box !important;
+  }
+
+  /* 图片本身的样式 */
+  #post-list .post-preview > .col-md-5 img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9; /* 尝试保持16:9的宽高比，如果图片尺寸不一，效果可能更好 */
+    object-fit: cover;    /* 裁剪以适应容器 */
+    border-radius: 4px !important; /* 给缩略图一点圆角 */
+    display: block; /* 移除图片下方的额外空间 */
+  }
+
+  /* 卡片内文字部分的样式调整 */
+  #post-list .post-preview .card-body {
+    padding: 0.25rem !important; /* 稍微给文字内容一点内边距，避免太贴边 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 使元信息尽可能在底部 */
+    height: 100%; /* 尝试让卡片内容撑满文字列高度 */
+  }
+  #post-list .post-preview .card-title {
+    font-size: 1rem !important; /* 稍微减小标题 */
+    line-height: 1.3 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.25rem !important;
+  }
+  #post-list .post-preview .card-text.content {
+    font-size: 0.8rem !important; /* 减小摘要文字 */
+    line-height: 1.4 !important;
+    margin-bottom: 0.25rem !important;
+    /* 控制摘要显示的行数 (可选) */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 尝试显示3行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #post-list .post-preview .post-meta {
+    font-size: 0.7rem !important; /* 减小元信息文字 */
+    margin-top: auto; /* 将元信息推到底部 */
+  }
+
+} /* @media (max-width: 849px) 结束 */
 
 
 /* --- 首页封面图片样式 (应用于所有屏幕尺寸，除非在媒体查询中被覆盖) --- */
