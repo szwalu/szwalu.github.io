@@ -1,15 +1,9 @@
 /* assets/css/my-custom-styles.css */
 
 /* --- 默认样式 (应用于桌面端 / 屏幕宽度 > 849px) --- */
-/* 在 PC 端默认隐藏仅为移动端设计的 Logo 链接 (及其内部图片) */
 #site-logo-link {
   display: none !important;
 }
-
-/* 如果您希望PC端的网站标题（通常是 #topbar-title 或 .site-title 内的文本）
-   有特定样式，可以在这里添加。目前它会使用Chirpy主题的默认样式。
-*/
-
 
 /* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
 @media (max-width: 849px) {
@@ -20,29 +14,29 @@
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 56px !important; /* 您期望的固定页眉高度 */
-    padding: 0 1rem !important; /* 页眉左右的内边距 */
-    background-color: var(--topbar-bg, #ffffff) !important; /* 页眉背景色，带备用值 */
-    z-index: 1050 !important; /* 确保在最上层 */
+    height: 56px !important;
+    padding: 0 1rem !important;
+    background-color: var(--topbar-bg, #ffffff) !important;
+    z-index: 1050 !important; /* 这个 z-index 已经比较高了 */
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
-    display: flex !important; /* 使用 flex 布局其直接子元素 (通常是 #topbar) */
-    align-items: center !important; /* 垂直居中子元素 */
+    display: flex !important;
+    align-items: center !important;
     box-sizing: border-box !important;
   }
 
-  /* 2. 为 body 添加上边距，防止内容被固定页眉遮挡 */
+  /* 2. 为 body 添加上边距 */
   body {
-    padding-top: 56px !important; /* 必须与 #topbar-wrapper 的高度一致 */
+    padding-top: 56px !important;
   }
 
-  /* 3. 页眉内部容器 (#topbar) 的样式 */
+  /* 3. 页眉内部容器 (#topbar) */
   #topbar {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
     height: 100% !important;
-    position: relative; /* 为 .site-branding 的绝对定位提供上下文参考 */
+    position: relative; /* 保持，为 .site-branding 提供定位上下文 */
   }
 
   /* 4. 页眉内部元素的布局 */
@@ -50,33 +44,32 @@
     order: 1;
     padding: 0 !important;
     margin: 0 !important;
-    /* z-index: 1051; */ /* 确保在 .site-branding 之上，如果点击区域有问题 */
+    position: relative; /* 新增：为了能够设置 z-index */
+    z-index: 2 !important;   /* 新增：确保在 .site-branding 之上 */
   }
 
-  /* 网站品牌区域（现在只包含文字标题，并使其居中） */
   .site-branding {
     position: absolute !important;
-    left: 0 !important; /* 从父容器（#topbar）的左边缘开始 */
-    right: 0 !important; /* 到父容器（#topbar）的右边缘结束 */
+    left: 0 !important;
+    right: 0 !important;
     top: 50% !important;
-    transform: translateY(-50%) !important; /* 仅垂直居中 */
-    display: flex !important; /* 使用 flex 布局内部的标题文字 */
-    align-items: center !important; /* 垂直对齐标题文字（如果标题有多行） */
-    justify-content: center !important; /* 水平居中标题文字 */
-    text-align: center; /* 辅助文本居中 */
-    /* 为左右两侧的按钮留出空间，避免文字标题与它们重叠 */
-    /* 您需要根据实际按钮宽度调整这里的 padding 值 */
-    padding-left: 50px !important;  /* 示例：为左侧菜单按钮留出空间 */
-    padding-right: 50px !important; /* 示例：为右侧搜索按钮留出空间 */
-    box-sizing: border-box !important; /* 确保 padding 包含在宽度内 */
-    /* width: auto; */ /* 移除，由 left/right 和 padding 控制有效宽度 */
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+    box-sizing: border-box !important;
+    z-index: 1 !important; /* 新增：让它在按钮下方，或者不设置z-index使其低于有z-index的按钮 */
   }
 
   #search-trigger {
     order: 3;
     padding: 0 !important;
     margin: 0 !important;
-    /* z-index: 1051; */ /* 确保在 .site-branding 之上，如果点击区域有问题 */
+    position: relative; /* 新增：为了能够设置 z-index */
+    z-index: 2 !important;   /* 新增：确保在 .site-branding 之上 */
   }
 
   /* 5. 移动端 Logo 的样式 - 保持隐藏 */
@@ -84,26 +77,25 @@
     display: none !important;
   }
 
-  #site-logo-img { /* 虽然隐藏了，但保持样式定义无害 */
+  #site-logo-img {
     height: 30px !important;
     width: auto !important;
     vertical-align: middle;
   }
 
-  /* 6. 移动端网站标题文字的样式 - 确保其适应新的居中方案 */
+  /* 6. 移动端网站标题文字的样式 */
    .site-branding #topbar-title {
-    font-size: 1.2em !important; /* 您可以按需调整大小 */
+    font-size: 1.2em !important;
     color: var(--topbar-text-color, var(--text-color)) !important;
-    margin: 0 !important; /* 移除所有外边距，居中由 .site-branding 控制 */
-    display: inline-block; /* 确保可以被 text-align: center 影响 */
-    /* 为了防止长标题与左右按钮重叠，可以加上文本溢出处理 */
+    margin: 0 !important;
+    display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%; /* 确保标题不会超出 .site-branding 的 padding 区域 */
+    max-width: 100%;
   }
 
-  /* --- 页面主体内容区域可能需要的边距调整 --- */
+  /* ... 其余的 #panel-wrapper, main, #post-list 等样式保持不变 ... */
   #panel-wrapper,
   main {
     padding-top: 0px !important;
@@ -122,7 +114,6 @@
     margin-top: 0.5rem !important;
   }
 
-  /* --- 文章列表项在移动端的图文排列 --- */
   #post-list .post-preview {
     display: flex !important;
     flex-direction: row !important;
@@ -195,9 +186,8 @@
     font-size: 0.7rem !important;
   }
 
-  /* --- 移动端封面图片容器的高度 --- */
   .homepage-cover-banner {
-    height: 250px !important; /* 移动端的高度 */
+    height: 250px !important;
   }
 
 } /* @media (max-width: 849px) 结束 */
@@ -207,7 +197,7 @@
 .homepage-cover-banner {
   margin-bottom: 2.5rem;
   width: 100%;
-  height: 400px; /* PC 端的高度设为 400px */
+  height: 400px;
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 8px;
