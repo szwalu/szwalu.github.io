@@ -36,53 +36,48 @@
   }
 
   /* 3. 页眉内部容器 (#topbar) 的样式 */
-  /* #topbar 通常是 #sidebar-trigger, .site-branding, #search-trigger 的直接父容器 */
   #topbar {
     display: flex !important;
-    justify-content: space-between !important; /* 两端对齐：菜单键最左，搜索键最右 */
-    align-items: center !important; /* 垂直居中所有项 */
-    width: 100% !important; /* 占据 #topbar-wrapper 内的全部可用宽度 */
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
     height: 100% !important;
-    position: relative; /* 为 .site-branding 的绝对定位提供上下文参考 */
+    position: relative;
   }
 
   /* 4. 页眉内部元素的布局 */
-  /* 菜单按钮（左侧） */
   #sidebar-trigger {
-    order: 1; /* 明确顺序，虽然默认可能就是1 */
+    order: 1;
     padding: 0 !important;
     margin: 0 !important;
   }
 
-  /* 网站品牌区域（Logo 和/或 标题，居中） */
   .site-branding {
     position: absolute !important;
     left: 50% !important;
     top: 50% !important;
-    transform: translate(-50%, -50%) !important; /* 精确居中 */
+    transform: translate(-50%, -50%) !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: center; /* 如果内部有多个元素，让它们也居中 */
+    justify-content: center;
   }
 
-  /* 搜索按钮（右侧） */
   #search-trigger {
-    order: 3; /* 明确顺序 */
+    order: 3;
     padding: 0 !important;
     margin: 0 !important;
   }
 
   /* 5. 移动端 Logo 的样式 */
   #site-logo-link {
-    display: inline-flex !important; /* 使其可见并表现为 flex 容器 */
+    display: inline-flex !important;
     align-items: center;
     line-height: 0;
   }
 
-  /* Logo 图片本身 */
   #site-logo-img {
-    height: 30px !important; /* 您期望的Logo高度 */
-    width: auto !important;  /* 宽度自适应 */
+    height: 30px !important;
+    width: auto !important;
     vertical-align: middle;
   }
 
@@ -116,40 +111,33 @@
   #post-list .post-preview {
     display: flex !important;
     flex-direction: row !important;
-    align-items: stretch !important; /* 让列等高 */
+    align-items: stretch !important;
     margin-bottom: 1.5rem !important;
   }
 
-  /* 默认情况下，内容列（文字或图片）先尝试占据全部宽度 */
   #post-list .post-preview > div[class*="col-md-"] {
     padding: 0 !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
-    flex-grow: 1; /* 允许伸展 */
-    flex-basis: 100%; /* 默认基础宽度为100% */
+    flex-grow: 1;
+    flex-basis: 100%;
   }
 
-  /* 图片列的特定样式 (当它作为 .col-md-5 存在时) */
   #post-list .post-preview > .col-md-5 {
-    order: 2 !important; /* 图片在右 */
-    flex-basis: 33% !important;  /* 图片列宽度 */
-    max-width: 33% !important;   /* 限制最大宽度 */
-    flex-shrink: 0 !important; /* 不允许收缩 */
-    margin-left: 0.75rem !important; /* 与文字的间距 */
+    order: 2 !important;
+    flex-basis: 33% !important;
+    max-width: 33% !important;
+    flex-shrink: 0 !important;
+    margin-left: 0.75rem !important;
   }
 
-  /* 文字内容列，当有图片时 (即它是 .col-md-7) */
   #post-list .post-preview > .col-md-7 {
-    order: 1 !important; /* 文字在左 */
-    flex-basis: calc(100% - 33% - 0.75rem) !important; /* 占据剩余宽度 */
-    max-width: calc(100% - 33% - 0.75rem) !important;  /* 限制最大宽度 */
+    order: 1 !important;
+    flex-basis: calc(100% - 33% - 0.75rem) !important;
+    max-width: calc(100% - 33% - 0.75rem) !important;
   }
-  /* 当文章没有图片时，文字内容列会是 .col-md-12 (由Jekyll模板逻辑生成)。
-     它会应用上面 div[class*="col-md-"] 的 flex-basis: 100% 规则，从而自动撑满整行。
-  */
 
-  /* 图片本身的样式 */
   #post-list .post-preview > .col-md-5 img {
     width: 100% !important;
     height: 100% !important;
@@ -159,7 +147,6 @@
     display: block !important;
   }
 
-  /* 卡片内文字部分的样式调整 */
   #post-list .post-preview .card-body {
     padding: 0.25rem !important;
     display: flex !important;
@@ -167,7 +154,7 @@
     justify-content: space-between !important;
     height: 100% !important;
     box-sizing: border-box !important;
-    flex-grow: 1; /* 确保.card-body填满其父列 */
+    flex-grow: 1;
   }
 
   #post-list .post-preview .card-title {
@@ -193,14 +180,25 @@
     font-size: 0.7rem !important;
   }
 
+  /* --- 新增：移动端封面图片容器的高度 --- */
+  .homepage-cover-banner {
+    height: 300px !important; /* 移动端的高度 */
+    /* 其他在移动端可能需要调整的 .homepage-cover-banner 样式可以放在这里
+       例如，如果移动端不希望有圆角或不同的下边距：
+       border-radius: 0 !important;
+       margin-bottom: 1.5rem !important;
+    */
+  }
+  /* 注意：.homepage-cover-banner img 的 height: 100% 会使其适应这个新的父容器高度 */
+
 } /* @media (max-width: 849px) 结束 */
 
 
-/* --- 首页封面图片样式 (应用于所有屏幕尺寸，除非在媒体查询中被覆盖) --- */
+/* --- 首页封面图片样式 (默认应用于PC端及所有屏幕尺寸) --- */
 .homepage-cover-banner {
   margin-bottom: 2.5rem;
   width: 100%;
-  height: 350px;
+  height: 600px; /* 修改：PC 端的高度设为 400px */
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 8px;
