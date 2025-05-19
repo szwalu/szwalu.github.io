@@ -42,7 +42,7 @@
     align-items: center !important;
     width: 100% !important;
     height: 100% !important;
-    position: relative;
+    position: relative; /* 为 .site-branding 的绝对定位提供上下文参考 */
   }
 
   /* 4. 页眉内部元素的布局 */
@@ -50,42 +50,57 @@
     order: 1;
     padding: 0 !important;
     margin: 0 !important;
+    /* z-index: 1051; */ /* 确保在 .site-branding 之上，如果点击区域有问题 */
   }
 
+  /* 网站品牌区域（现在只包含文字标题，并使其居中） */
   .site-branding {
     position: absolute !important;
-    left: 50% !important;
+    left: 0 !important; /* 从父容器（#topbar）的左边缘开始 */
+    right: 0 !important; /* 到父容器（#topbar）的右边缘结束 */
     top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center;
+    transform: translateY(-50%) !important; /* 仅垂直居中 */
+    display: flex !important; /* 使用 flex 布局内部的标题文字 */
+    align-items: center !important; /* 垂直对齐标题文字（如果标题有多行） */
+    justify-content: center !important; /* 水平居中标题文字 */
+    text-align: center; /* 辅助文本居中 */
+    /* 为左右两侧的按钮留出空间，避免文字标题与它们重叠 */
+    /* 您需要根据实际按钮宽度调整这里的 padding 值 */
+    padding-left: 50px !important;  /* 示例：为左侧菜单按钮留出空间 */
+    padding-right: 50px !important; /* 示例：为右侧搜索按钮留出空间 */
+    box-sizing: border-box !important; /* 确保 padding 包含在宽度内 */
+    /* width: auto; */ /* 移除，由 left/right 和 padding 控制有效宽度 */
   }
 
   #search-trigger {
     order: 3;
     padding: 0 !important;
     margin: 0 !important;
+    /* z-index: 1051; */ /* 确保在 .site-branding 之上，如果点击区域有问题 */
   }
 
-  /* 5. 移动端 Logo 的样式 */
+  /* 5. 移动端 Logo 的样式 - 保持隐藏 */
   #site-logo-link {
-    display: inline-flex !important;
-    align-items: center;
-    line-height: 0;
+    display: none !important;
   }
 
-  #site-logo-img {
+  #site-logo-img { /* 虽然隐藏了，但保持样式定义无害 */
     height: 30px !important;
     width: auto !important;
     vertical-align: middle;
   }
 
-  /* 6. 移动端网站标题文字的样式 */
+  /* 6. 移动端网站标题文字的样式 - 确保其适应新的居中方案 */
    .site-branding #topbar-title {
-    font-size: 1.2em !important;
+    font-size: 1.2em !important; /* 您可以按需调整大小 */
     color: var(--topbar-text-color, var(--text-color)) !important;
-    margin-left: 8px;
+    margin: 0 !important; /* 移除所有外边距，居中由 .site-branding 控制 */
+    display: inline-block; /* 确保可以被 text-align: center 影响 */
+    /* 为了防止长标题与左右按钮重叠，可以加上文本溢出处理 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* 确保标题不会超出 .site-branding 的 padding 区域 */
   }
 
   /* --- 页面主体内容区域可能需要的边距调整 --- */
@@ -180,16 +195,10 @@
     font-size: 0.7rem !important;
   }
 
-  /* --- 新增：移动端封面图片容器的高度 --- */
+  /* --- 移动端封面图片容器的高度 --- */
   .homepage-cover-banner {
-    height: 300px !important; /* 移动端的高度 */
-    /* 其他在移动端可能需要调整的 .homepage-cover-banner 样式可以放在这里
-       例如，如果移动端不希望有圆角或不同的下边距：
-       border-radius: 0 !important;
-       margin-bottom: 1.5rem !important;
-    */
+    height: 250px !important; /* 移动端的高度 */
   }
-  /* 注意：.homepage-cover-banner img 的 height: 100% 会使其适应这个新的父容器高度 */
 
 } /* @media (max-width: 849px) 结束 */
 
@@ -198,7 +207,7 @@
 .homepage-cover-banner {
   margin-bottom: 2.5rem;
   width: 100%;
-  height: 600px; /* 修改：PC 端的高度设为 400px */
+  height: 400px; /* PC 端的高度设为 400px */
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 8px;
