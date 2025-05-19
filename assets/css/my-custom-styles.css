@@ -124,21 +124,23 @@
 }
 
 
-/* --- 新增：首页封面图片样式 (应用于所有屏幕尺寸，除非在媒体查询中被覆盖) --- */
+/* --- 首页封面图片样式 (应用于所有屏幕尺寸，除非在媒体查询中被覆盖) --- */
 .homepage-cover-banner {
   margin-bottom: 2.5rem; /* 图片下方的间距，可以根据需要调整 */
   width: 100%; /* 让容器占据其父元素（通常是主内容列）的全部宽度 */
+  height: 350px; /* 修改：为容器设定一个明确的高度，例如 350px，请按需调整 */
   box-sizing: border-box; /* 确保 padding 和 border 不会增加总宽度 */
-  /* text-align: center; /* 如果图片本身没有撑满此容器，使其在此容器内居中 */
+  overflow: hidden; /* 新增：如果图片因 object-fit 可能有轻微超出，确保裁剪 */
+  border-radius: 8px; /* 修改：将圆角应用到容器上，而不是直接应用到图片上，效果更好 */
+  /* text-align: center; */ /* 如果图片没有撑满此容器，这个不再那么重要 */
 }
 
 .homepage-cover-banner img {
-  display: block; /* 让图片表现为块级元素，更容易控制其宽度和可能的左右auto margin */
+  display: block; /* 让图片表现为块级元素 */
   width: 100%;    /* 让图片宽度充满其父容器 (.homepage-cover-banner) */
-  max-height: 350px; /* 您可以按需调整最大高度 */
+  height: 100%;   /* 修改：让图片高度也充满其父容器 .homepage-cover-banner */
+  /* max-height: 350px; */ /* 移除：现在高度由父容器的 height 和图片的 height:100% 控制 */
   object-fit: cover;  /* 图片会填满容器，保持宽高比，多余部分会被裁剪 */
   object-position: center; /* 裁剪时尽量保持图片中央部分可见 */
-  border-radius: 8px; /* 可选：给图片加一点圆角 */
-  /* margin-left: auto; */ /* 如果 width 不是 100%，这两个可以用来居中图片 */
-  /* margin-right: auto; */
+  /* border-radius: 8px; */ /* 移除：圆角已移到父容器 .homepage-cover-banner 上 */
 }
