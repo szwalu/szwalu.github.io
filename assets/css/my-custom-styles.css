@@ -52,7 +52,6 @@
     order: 1; /* 明确顺序，虽然默认可能就是1 */
     padding: 0 !important;
     margin: 0 !important;
-    /* flex: 0 0 auto; (可选，防止其缩放) */
   }
 
   /* 网站品牌区域（Logo 和/或 标题，居中） */
@@ -64,8 +63,6 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center; /* 如果内部有多个元素，让它们也居中 */
-    /* width: auto; (宽度由内容决定) */
-    /* order: 2; (对于绝对定位元素，order 不影响其在 #topbar flex流中的位置) */
   }
 
   /* 搜索按钮（右侧） */
@@ -73,40 +70,33 @@
     order: 3; /* 明确顺序 */
     padding: 0 !important;
     margin: 0 !important;
-    /* flex: 0 0 auto; (可选) */
   }
 
   /* 5. 移动端 Logo 的样式 */
-  /* Logo 的链接容器，在移动端设为可见 */
   #site-logo-link {
     display: inline-flex !important; /* 使其可见并表现为 flex 容器 */
     align-items: center;
-    line-height: 0; /* 消除图片链接可能的多余行高 */
-    /* margin-right: 8px; */ /* 如果您希望Logo和文字标题并排显示，并需要间距 */
+    line-height: 0;
   }
 
   /* Logo 图片本身 */
   #site-logo-img {
     height: 30px !important; /* 您期望的Logo高度 */
     width: auto !important;  /* 宽度自适应 */
-    vertical-align: middle; /* 确保图片垂直对齐良好 */
+    vertical-align: middle;
   }
 
-  /* 6. 移动端网站标题文字的样式 (如果它在 .site-branding 中且需要显示) */
-  /* 如果您在移动端只想要 Logo，不想要文字标题，可以取消下面这行注释 */
-  /* .site-branding #topbar-title { display: none !important; } */
-
-  /* 如果您希望 Logo 和文字标题同时在移动端 .site-branding 中显示，可以调整文字样式 */
+  /* 6. 移动端网站标题文字的样式 */
    .site-branding #topbar-title {
-    font-size: 1.2em !important; /* 示例大小，请按需调整 */
+    font-size: 1.2em !important;
     color: var(--topbar-text-color, var(--text-color)) !important;
-    margin-left: 8px; /* Logo 和文字之间的间距 (如果并排显示) */
+    margin-left: 8px;
   }
 
-  /* --- 页面主体内容区域可能需要的边距调整 (来自您之前的CSS，通常是好的) --- */
+  /* --- 页面主体内容区域可能需要的边距调整 --- */
   #panel-wrapper,
   main {
-    padding-top: 0px !important; /* 因为 body 已经有了 padding-top */
+    padding-top: 0px !important;
     margin-top: 0px !important;
   }
 
@@ -122,72 +112,85 @@
     margin-top: 0.5rem !important;
   }
 
-  /* --- 修改：调整文章列表项中图片和文字的顺序及宽度 (移动端) --- */
+  /* --- 文章列表项在移动端的图文排列 --- */
   #post-list .post-preview {
     display: flex !important;
-    flex-direction: row !important; /* 确保是横向排列 */
-    align-items: flex-start; /* 顶部对齐，如果内容高度不一，可以试试 center */
-    /* border: 1px solid red; */ /* 临时边框用于调试 */
+    flex-direction: row !important;
+    align-items: stretch !important; /* 让列等高 */
+    margin-bottom: 1.5rem !important;
   }
 
-  /* 图片列 */
+  /* 默认情况下，内容列（文字或图片）先尝试占据全部宽度 */
+  #post-list .post-preview > div[class*="col-md-"] {
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1; /* 允许伸展 */
+    flex-basis: 100%; /* 默认基础宽度为100% */
+  }
+
+  /* 图片列的特定样式 (当它作为 .col-md-5 存在时) */
   #post-list .post-preview > .col-md-5 {
     order: 2 !important; /* 图片在右 */
-    flex-basis: 33% !important;  /* 图片占据大约1/3宽度，您可以微调 */
-    max-width: 33% !important;
-    flex-shrink: 0 !important; /* 防止图片列被压缩 */
-    margin-left: 0.75rem !important; /* 图片与文字之间的间距 */
-    padding: 0 !important; /* 移除列的内边距，让图片更贴近列的边缘 */
-    box-sizing: border-box !important;
+    flex-basis: 33% !important;  /* 图片列宽度 */
+    max-width: 33% !important;   /* 限制最大宽度 */
+    flex-shrink: 0 !important; /* 不允许收缩 */
+    margin-left: 0.75rem !important; /* 与文字的间距 */
   }
 
-  /* 文字内容列 */
-  #post-list .post-preview > div[class*="col-md-"]:not(.col-md-5) {
+  /* 文字内容列，当有图片时 (即它是 .col-md-7) */
+  #post-list .post-preview > .col-md-7 {
     order: 1 !important; /* 文字在左 */
-    flex-basis: calc(67% - 0.75rem) !important; /* 文字占据剩余宽度减去图片间距，您可以微调 */
-    max-width: calc(67% - 0.75rem) !important;
-    padding: 0 !important; /* 移除列的内边距，让文字更贴近列的边缘 */
-    box-sizing: border-box !important;
+    flex-basis: calc(100% - 33% - 0.75rem) !important; /* 占据剩余宽度 */
+    max-width: calc(100% - 33% - 0.75rem) !important;  /* 限制最大宽度 */
   }
+  /* 当文章没有图片时，文字内容列会是 .col-md-12 (由Jekyll模板逻辑生成)。
+     它会应用上面 div[class*="col-md-"] 的 flex-basis: 100% 规则，从而自动撑满整行。
+  */
 
   /* 图片本身的样式 */
   #post-list .post-preview > .col-md-5 img {
     width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 9; /* 尝试保持16:9的宽高比，如果图片尺寸不一，效果可能更好 */
-    object-fit: cover;    /* 裁剪以适应容器 */
-    border-radius: 4px !important; /* 给缩略图一点圆角 */
-    display: block; /* 移除图片下方的额外空间 */
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center;
+    border-radius: 4px !important;
+    display: block !important;
   }
 
   /* 卡片内文字部分的样式调整 */
   #post-list .post-preview .card-body {
-    padding: 0.25rem !important; /* 稍微给文字内容一点内边距，避免太贴边 */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* 使元信息尽可能在底部 */
-    height: 100%; /* 尝试让卡片内容撑满文字列高度 */
+    padding: 0.25rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    flex-grow: 1; /* 确保.card-body填满其父列 */
   }
+
   #post-list .post-preview .card-title {
-    font-size: 1rem !important; /* 稍微减小标题 */
+    font-size: 1rem !important;
     line-height: 1.3 !important;
     margin-top: 0 !important;
     margin-bottom: 0.25rem !important;
   }
+
   #post-list .post-preview .card-text.content {
-    font-size: 0.8rem !important; /* 减小摘要文字 */
+    font-size: 0.85rem !important;
     line-height: 1.4 !important;
     margin-bottom: 0.25rem !important;
-    /* 控制摘要显示的行数 (可选) */
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* 尝试显示3行 */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    flex-grow: 1;
   }
+
   #post-list .post-preview .post-meta {
-    font-size: 0.7rem !important; /* 减小元信息文字 */
-    margin-top: auto; /* 将元信息推到底部 */
+    font-size: 0.7rem !important;
   }
 
 } /* @media (max-width: 849px) 结束 */
@@ -195,21 +198,18 @@
 
 /* --- 首页封面图片样式 (应用于所有屏幕尺寸，除非在媒体查询中被覆盖) --- */
 .homepage-cover-banner {
-  margin-bottom: 2.5rem; /* 图片下方的间距，可以根据需要调整 */
-  width: 100%; /* 让容器占据其父元素（通常是主内容列）的全部宽度 */
-  height: 350px; /* 修改：为容器设定一个明确的高度，例如 350px，请按需调整 */
-  box-sizing: border-box; /* 确保 padding 和 border 不会增加总宽度 */
-  overflow: hidden; /* 新增：如果图片因 object-fit 可能有轻微超出，确保裁剪 */
-  border-radius: 8px; /* 修改：将圆角应用到容器上，而不是直接应用到图片上，效果更好 */
-  /* text-align: center; */ /* 如果图片没有撑满此容器，这个不再那么重要 */
+  margin-bottom: 2.5rem;
+  width: 100%;
+  height: 350px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .homepage-cover-banner img {
-  display: block; /* 让图片表现为块级元素 */
-  width: 100%;    /* 让图片宽度充满其父容器 (.homepage-cover-banner) */
-  height: 100%;   /* 修改：让图片高度也充满其父容器 .homepage-cover-banner */
-  /* max-height: 350px; */ /* 移除：现在高度由父容器的 height 和图片的 height:100% 控制 */
-  object-fit: cover;  /* 图片会填满容器，保持宽高比，多余部分会被裁剪 */
-  object-position: center; /* 裁剪时尽量保持图片中央部分可见 */
-  /* border-radius: 8px; */ /* 移除：圆角已移到父容器 .homepage-cover-banner 上 */
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
