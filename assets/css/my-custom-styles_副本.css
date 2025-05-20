@@ -1,15 +1,9 @@
 /* assets/css/my-custom-styles.css */
 
 /* --- 默认样式 (应用于桌面端 / 屏幕宽度 > 849px) --- */
-/* 在 PC 端默认隐藏仅为移动端设计的 Logo 链接 (及其内部图片) */
 #site-logo-link {
   display: none !important;
 }
-
-/* 如果您希望PC端的网站标题（通常是 #topbar-title 或 .site-title 内的文本）
-   有特定样式，可以在这里添加。目前它会使用Chirpy主题的默认样式。
-*/
-
 
 /* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
 @media (max-width: 849px) {
@@ -20,29 +14,29 @@
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 56px !important; /* 您期望的固定页眉高度 */
-    padding: 0 1rem !important; /* 页眉左右的内边距 */
-    background-color: var(--topbar-bg, #ffffff) !important; /* 页眉背景色，带备用值 */
-    z-index: 1050 !important; /* 确保在最上层 */
+    height: 56px !important;
+    padding: 0 1rem !important;
+    background-color: var(--topbar-bg, #ffffff) !important;
+    z-index: 1050 !important; /* 这个 z-index 已经比较高了 */
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
-    display: flex !important; /* 使用 flex 布局其直接子元素 (通常是 #topbar) */
-    align-items: center !important; /* 垂直居中子元素 */
+    display: flex !important;
+    align-items: center !important;
     box-sizing: border-box !important;
   }
 
-  /* 2. 为 body 添加上边距，防止内容被固定页眉遮挡 */
+  /* 2. 为 body 添加上边距 */
   body {
-    padding-top: 56px !important; /* 必须与 #topbar-wrapper 的高度一致 */
+    padding-top: 56px !important;
   }
 
-  /* 3. 页眉内部容器 (#topbar) 的样式 */
+  /* 3. 页眉内部容器 (#topbar) */
   #topbar {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
     height: 100% !important;
-    position: relative;
+    position: relative; /* 保持，为 .site-branding 提供定位上下文 */
   }
 
   /* 4. 页眉内部元素的布局 */
@@ -50,29 +44,37 @@
     order: 1;
     padding: 0 !important;
     margin: 0 !important;
+    position: relative; /* 新增：为了能够设置 z-index */
+    z-index: 2 !important;   /* 新增：确保在 .site-branding 之上 */
   }
 
   .site-branding {
     position: absolute !important;
-    left: 50% !important;
+    left: 0 !important;
+    right: 0 !important;
     top: 50% !important;
-    transform: translate(-50%, -50%) !important;
+    transform: translateY(-50%) !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: center;
+    justify-content: center !important;
+    text-align: center;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+    box-sizing: border-box !important;
+    z-index: 1 !important; /* 新增：让它在按钮下方，或者不设置z-index使其低于有z-index的按钮 */
   }
 
   #search-trigger {
     order: 3;
     padding: 0 !important;
     margin: 0 !important;
+    position: relative; /* 新增：为了能够设置 z-index */
+    z-index: 2 !important;   /* 新增：确保在 .site-branding 之上 */
   }
 
-  /* 5. 移动端 Logo 的样式 */
+  /* 5. 移动端 Logo 的样式 - 保持隐藏 */
   #site-logo-link {
-    display: inline-flex !important;
-    align-items: center;
-    line-height: 0;
+    display: none !important;
   }
 
   #site-logo-img {
@@ -85,10 +87,15 @@
    .site-branding #topbar-title {
     font-size: 1.2em !important;
     color: var(--topbar-text-color, var(--text-color)) !important;
-    margin-left: 8px;
+    margin: 0 !important;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
-  /* --- 页面主体内容区域可能需要的边距调整 --- */
+  /* ... 其余的 #panel-wrapper, main, #post-list 等样式保持不变 ... */
   #panel-wrapper,
   main {
     padding-top: 0px !important;
@@ -107,7 +114,6 @@
     margin-top: 0.5rem !important;
   }
 
-  /* --- 文章列表项在移动端的图文排列 --- */
   #post-list .post-preview {
     display: flex !important;
     flex-direction: row !important;
@@ -180,16 +186,9 @@
     font-size: 0.7rem !important;
   }
 
-  /* --- 新增：移动端封面图片容器的高度 --- */
   .homepage-cover-banner {
-    height: 300px !important; /* 移动端的高度 */
-    /* 其他在移动端可能需要调整的 .homepage-cover-banner 样式可以放在这里
-       例如，如果移动端不希望有圆角或不同的下边距：
-       border-radius: 0 !important;
-       margin-bottom: 1.5rem !important;
-    */
+    height: 250px !important;
   }
-  /* 注意：.homepage-cover-banner img 的 height: 100% 会使其适应这个新的父容器高度 */
 
 } /* @media (max-width: 849px) 结束 */
 
@@ -198,7 +197,7 @@
 .homepage-cover-banner {
   margin-bottom: 2.5rem;
   width: 100%;
-  height: 600px; /* 修改：PC 端的高度设为 400px */
+  height: 400px;
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 8px;
