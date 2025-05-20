@@ -186,8 +186,8 @@
   }
 
   #post-list .post-preview .card-title {
-    font-size: 1.25rem !important;
-    line-height: 1.4 !important;
+    font-size: 1.2rem !important;
+    line-height: 1.35 !important;
     margin-top: 0 !important;
     margin-bottom: 0.3rem !important;
   }
@@ -205,7 +205,7 @@
   }
 
   #post-list .post-preview .post-meta {
-    font-size: 0.75rem !important;
+    font-size: 0.8rem !important;
   }
 
   /* 移动端封面图片容器的高度 (保持不变) */
