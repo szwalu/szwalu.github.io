@@ -8,46 +8,25 @@
 /* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
 @media (max-width: 849px) {
 
-  /* 1. 固定页眉容器 (#topbar-wrapper) - 修改为 sticky 定位 */
+  /* 1. 固定页眉容器 (#topbar-wrapper) */
   #topbar-wrapper {
-    position: sticky !important; /* 修改：从 fixed 改为 sticky */
-    top: 0 !important;          /* sticky 定位需要 top, bottom, left, 或 right 中的至少一个 */
-    left: 0 !important;         /* 通常 sticky 元素会自然占据其父容器宽度，但为保险起见 */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
     height: 56px !important;
     padding: 0 1rem !important;
     background-color: var(--topbar-bg, #ffffff) !important;
-    z-index: 1050 !important;
+    z-index: 1050 !important; /* 这个 z-index 已经比较高了 */
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
     display: flex !important;
     align-items: center !important;
     box-sizing: border-box !important;
-    /* 使用 sticky 时，通常不需要 transform 来修正位置，也可能不需要特定的 transition */
-    /* transform: none !important; */ /* 移除或注释掉，看 sticky 的表现 */
-    /* transition: transform 0.3s ease-out; */ /* 如果 sticky 后不需要 JS 驱动的 transform，可以移除 */
   }
-
-  /* 当侧边栏显示时，对于 sticky 定位的元素，我们通常不需要额外处理其 top 或 margin-top，
-     因为它不应该受父级 transform 的影响而垂直位移。
-     所以 body.sidebar-display #topbar-wrapper 规则可以暂时移除或注释掉。
-  */
-  /*
-  body.sidebar-display #topbar-wrapper {
-    top: 0 !important;
-    margin-top: 0 !important;
-  }
-  */
 
   /* 2. 为 body 添加上边距 */
-  /* 对于 position: sticky，body 的 padding-top 可能不再需要，
-     因为 sticky 元素在未“粘住”前仍在文档流中。
-     如果移除 padding-top 后，初始时内容被页眉遮挡，则需要加回来。
-     或者，如果 #topbar-wrapper 不是 body 的直接子元素，而是某个滚动容器的子元素，
-     那么 padding-top 可能需要应用在那个滚动容器上。
-     我们先尝试移除或注释掉它，观察效果。
-  */
   body {
-    /* padding-top: 56px !important; */ /* 暂时注释掉 */
+    padding-top: 56px !important;
   }
 
   /* 3. 页眉内部容器 (#topbar) */
@@ -57,16 +36,16 @@
     align-items: center !important;
     width: 100% !important;
     height: 100% !important;
-    position: relative; /* 这个 position: relative 仍然有用，为了 .site-branding 的绝对定位 */
+    position: relative; /* 保持，为 .site-branding 提供定位上下文 */
   }
 
-  /* 4. 页眉内部元素的布局 (保持不变) */
+  /* 4. 页眉内部元素的布局 */
   #sidebar-trigger {
     order: 1;
     padding: 0 !important;
     margin: 0 !important;
-    position: relative;
-    z-index: 2 !important;
+    position: relative; /* 新增：为了能够设置 z-index */
+    z-index: 2 !important;   /* 新增：确保在 .site-branding 之上 */
   }
 
   .site-branding {
@@ -82,15 +61,15 @@
     padding-left: 50px !important;
     padding-right: 50px !important;
     box-sizing: border-box !important;
-    z-index: 1 !important;
+    z-index: 1 !important; /* 新增：让它在按钮下方，或者不设置z-index使其低于有z-index的按钮 */
   }
 
   #search-trigger {
     order: 3;
     padding: 0 !important;
     margin: 0 !important;
-    position: relative;
-    z-index: 2 !important;
+    position: relative; /* 新增：为了能够设置 z-index */
+    z-index: 2 !important;   /* 新增：确保在 .site-branding 之上 */
   }
 
   /* 5. 移动端 Logo 的样式 - 保持隐藏 */
@@ -104,7 +83,7 @@
     vertical-align: middle;
   }
 
-  /* 6. 移动端网站标题文字的样式 (保持不变) */
+  /* 6. 移动端网站标题文字的样式 */
    .site-branding #topbar-title {
     font-size: 1.2em !important;
     color: var(--topbar-text-color, var(--text-color)) !important;
@@ -116,7 +95,7 @@
     max-width: 100%;
   }
 
-  /* --- 页面主体内容区域可能需要的边距调整 (保持不变) --- */
+  /* ... 其余的 #panel-wrapper, main, #post-list 等样式保持不变 ... */
   #panel-wrapper,
   main {
     padding-top: 0px !important;
@@ -135,12 +114,11 @@
     margin-top: 0.5rem !important;
   }
 
-  /* --- 文章列表项在移动端的图文排列 (保持不变) --- */
   #post-list .post-preview {
     display: flex !important;
     flex-direction: row !important;
     align-items: stretch !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 1.5rem !important;
   }
 
   #post-list .post-preview > div[class*="col-md-"] {
@@ -186,16 +164,16 @@
   }
 
   #post-list .post-preview .card-title {
-    font-size: 1.15rem !important;
-    line-height: 1.35 !important;
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
     margin-top: 0 !important;
-    margin-bottom: 0.3rem !important;
+    margin-bottom: 0.25rem !important;
   }
 
   #post-list .post-preview .card-text.content {
-    font-size: 0.9rem !important;
-    line-height: 1.5 !important;
-    margin-bottom: 0.3rem !important;
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.25rem !important;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -205,10 +183,9 @@
   }
 
   #post-list .post-preview .post-meta {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
   }
 
-  /* 移动端封面图片容器的高度 (保持不变) */
   .homepage-cover-banner {
     height: 250px !important;
   }
@@ -220,7 +197,7 @@
 .homepage-cover-banner {
   margin-bottom: 2.5rem;
   width: 100%;
-  height: 400px; /* PC 端的高度 */
+  height: 400px;
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 8px;
