@@ -193,7 +193,7 @@
   }
 
   #post-list .post-preview .card-text.content {
-    font-size: 1rem !important;
+    font-size: 1.05rem !important;
     line-height: 1.6 !important;
     margin-bottom: 0.3rem !important;
     display: -webkit-box;
