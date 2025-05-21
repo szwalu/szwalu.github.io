@@ -5,6 +5,47 @@
   display: none !important;
 }
 
+/* 新增：调整PC端文章列表缩略图的宽度 */
+/* 我们假设PC端屏幕宽度大于849px */
+@media (min-width: 850px) { /* 或者您使用的PC端断点，例如 min-width: 768px */
+
+  /* 确保文章列表项的子列是等高的 */
+  #post-list .post-preview {
+    display: flex; /* 如果主题默认不是flex，或者需要覆盖，则添加 */
+    align-items: stretch; /* 确保子列（图片列和文字列）等高 */
+  }
+
+  /* 图片列 */
+  #post-list .post-preview > .col-md-5 {
+    flex-basis: 25% !important;
+    max-width: 25% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important; /* 如果希望图片和文字之间有间距，在这里或文字列使用margin */
+    box-sizing: border-box !important;
+    display: flex; /* 新增：使其成为flex容器，以便内部图片可以更好地定位或拉伸 */
+  }
+
+  /* 文字内容列 */
+  #post-list .post-preview > .col-md-7 {
+    flex-basis: calc(75% - 0.5rem) !important; /* 调整：如果padding变小，这里可以相应增大 */
+    max-width: calc(75% - 0.5rem) !important;  /* 调整：如果padding变小，这里可以相应增大 */
+    box-sizing: border-box !important;
+    padding-left: 0rem !important; /* 修改：例如从 1rem 减小到 0.5rem，或您期望的值 */
+                                   /* 如果您希望文字完全贴近左边（没有额外边距），可以设为 0 */
+  }
+
+  /* PC端图片样式修改 */
+  #post-list .post-preview > .col-md-5 img {
+    width: 100% !important;
+    height: 100% !important;  /* 修改：让图片高度充满其父容器（图片列 .col-md-5）*/
+    object-fit: cover !important; /* 新增或取消注释：保持宽高比，裁剪以填充 */
+    object-position: center; /* 新增或取消注释：裁剪时尽量保持图片中央部分可见 */
+    display: block !important;
+    border-radius: 4px;
+  }
+}
+
+
 /* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
 @media (max-width: 849px) {
 
