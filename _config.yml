@@ -46,10 +46,10 @@ social:
   # 在页脚等处显示的社交链接列表。
   links:
     # 第一个链接通常用作版权所有者的链接。
-    - https://twitter.com/username # 更改为你的 Twitter 主页
-    - https://github.com/username # 更改为你的 GitHub 主页
+    - https://www.bqju.com
+    # - https://twitter.com/username # 更改为你的 Twitter 主页
+    # - https://github.com/username # 更改为你的 GitHub 主页
     # 取消下面的注释 (#) 来添加更多社交链接
-    # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
 # 网站验证设置 (用于搜索引擎站长工具)
