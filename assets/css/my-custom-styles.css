@@ -11,8 +11,9 @@
 
   /* 确保文章列表项的子列是等高的 */
   #post-list .post-preview {
-    display: flex; /* 如果主题默认不是flex，或者需要覆盖，则添加 */
-    align-items: stretch; /* 确保子列（图片列和文字列）等高 */
+    display: flex !important; /* 确保是flex容器 */
+    align-items: stretch !important; /* 确保子列（图片列和文字列）等高 */
+    margin-bottom: 1.5rem !important; /* PC端列表项之间的间距，您可以按需调整 */
   }
 
   /* 图片列 */
@@ -20,28 +21,76 @@
     flex-basis: 25% !important;
     max-width: 25% !important;
     padding-left: 0 !important;
-    padding-right: 0 !important; /* 如果希望图片和文字之间有间距，在这里或文字列使用margin */
+    padding-right: 0 !important;
     box-sizing: border-box !important;
-    display: flex; /* 新增：使其成为flex容器，以便内部图片可以更好地定位或拉伸 */
+    display: flex !important;
+    margin-right: 1rem !important; /* 图片列右侧的间距 */
   }
 
   /* 文字内容列 */
   #post-list .post-preview > .col-md-7 {
-    flex-basis: calc(75% - 0.5rem) !important; /* 调整：如果padding变小，这里可以相应增大 */
-    max-width: calc(75% - 0.5rem) !important;  /* 调整：如果padding变小，这里可以相应增大 */
+    flex-basis: calc(75% - 1rem) !important; /* 减去图片列的 margin-right */
+    max-width: calc(75% - 1rem) !important;  /* 减去图片列的 margin-right */
     box-sizing: border-box !important;
-    padding-left: 0rem !important; /* 修改：例如从 1rem 减小到 0.5rem，或您期望的值 */
-                                   /* 如果您希望文字完全贴近左边（没有额外边距），可以设为 0 */
+    padding-left: 0 !important; /* 文字紧贴此列的左边 (由图片列的margin-right控制间距) */
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   /* PC端图片样式修改 */
   #post-list .post-preview > .col-md-5 img {
     width: 100% !important;
-    height: 100% !important;  /* 修改：让图片高度充满其父容器（图片列 .col-md-5）*/
-    object-fit: cover !important; /* 新增或取消注释：保持宽高比，裁剪以填充 */
-    object-position: center; /* 新增或取消注释：裁剪时尽量保持图片中央部分可见 */
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center;
     display: block !important;
     border-radius: 4px;
+  }
+
+  /* PC端文章列表项卡片内文字部分的样式调整 */
+  #post-list .post-preview .card-body {
+    padding: 0.25rem 0 !important; /* PC端卡片内body的垂直内边距 */
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    flex-grow: 1;
+    justify-content: flex-start !important; /* 内容从上到下紧凑排列 */
+  }
+
+  /* 修改：PC端文章列表标题单行省略号 */
+  #post-list .post-preview .card-title {
+    font-size: 1.2rem !important;  /* PC端标题字体 */
+    line-height: 1.4 !important;   /* PC端标题行高 */
+    margin-top: 0 !important;
+    margin-bottom: 0.4rem !important; /* 标题和摘要间的距离 */
+    /* --- 实现单行省略号 --- */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important; /* 确保 overflow 和 text-overflow 生效 */
+    /* --- 移除之前可能的多行截断属性 --- */
+    /* display: -webkit-box; */
+    /* -webkit-line-clamp: initial; */
+    /* -webkit-box-orient: initial; */
+  }
+
+  /* PC端文章列表摘要（保持多行） */
+  #post-list .post-preview .card-text.content {
+    font-size: 0.9rem !important; /* PC端摘要字体 */
+    line-height: 1.5 !important;  /* PC端摘要行高 */
+    margin-bottom: 0.5rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important; /* PC端摘要保持3行 (您可以按需调整) */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex-grow: 1; /* 允许摘要伸展以填充空间 */
+  }
+
+  #post-list .post-preview .post-meta {
+    font-size: 0.8rem !important; /* PC端元信息字体 */
+    margin-top: auto; /* 将元信息推到底部 */
   }
 }
 
@@ -49,11 +98,11 @@
 /* --- 仅在屏幕宽度小于或等于 849px 时应用的样式 (针对移动端) --- */
 @media (max-width: 849px) {
 
-  /* 1. 固定页眉容器 (#topbar-wrapper) - 修改为 sticky 定位 */
+  /* 1. 固定页眉容器 (#topbar-wrapper) */
   #topbar-wrapper {
-    position: sticky !important; /* 修改：从 fixed 改为 sticky */
-    top: 0 !important;          /* sticky 定位需要 top, bottom, left, 或 right 中的至少一个 */
-    left: 0 !important;         /* 通常 sticky 元素会自然占据其父容器宽度，但为保险起见 */
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
     height: 56px !important;
     padding: 0 1rem !important;
@@ -63,45 +112,21 @@
     display: flex !important;
     align-items: center !important;
     box-sizing: border-box !important;
-    /* 使用 sticky 时，通常不需要 transform 来修正位置，也可能不需要特定的 transition */
-    /* transform: none !important; */ /* 移除或注释掉，看 sticky 的表现 */
-    /* transition: transform 0.3s ease-out; */ /* 如果 sticky 后不需要 JS 驱动的 transform，可以移除 */
   }
 
-  /* 当侧边栏显示时，对于 sticky 定位的元素，我们通常不需要额外处理其 top 或 margin-top，
-     因为它不应该受父级 transform 的影响而垂直位移。
-     所以 body.sidebar-display #topbar-wrapper 规则可以暂时移除或注释掉。
-  */
-  /*
-  body.sidebar-display #topbar-wrapper {
-    top: 0 !important;
-    margin-top: 0 !important;
-  }
-  */
-
-  /* 2. 为 body 添加上边距 */
-  /* 对于 position: sticky，body 的 padding-top 可能不再需要，
-     因为 sticky 元素在未“粘住”前仍在文档流中。
-     如果移除 padding-top 后，初始时内容被页眉遮挡，则需要加回来。
-     或者，如果 #topbar-wrapper 不是 body 的直接子元素，而是某个滚动容器的子元素，
-     那么 padding-top 可能需要应用在那个滚动容器上。
-     我们先尝试移除或注释掉它，观察效果。
-  */
   body {
-    /* padding-top: 56px !important; */ /* 暂时注释掉 */
+    /* padding-top: 56px !important; */ /* 对于 sticky 定位，这个可能不需要 */
   }
 
-  /* 3. 页眉内部容器 (#topbar) */
   #topbar {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
     height: 100% !important;
-    position: relative; /* 这个 position: relative 仍然有用，为了 .site-branding 的绝对定位 */
+    position: relative;
   }
 
-  /* 4. 页眉内部元素的布局 (保持不变) */
   #sidebar-trigger {
     order: 1;
     padding: 0 !important;
@@ -134,7 +159,6 @@
     z-index: 2 !important;
   }
 
-  /* 5. 移动端 Logo 的样式 - 保持隐藏 */
   #site-logo-link {
     display: none !important;
   }
@@ -145,7 +169,6 @@
     vertical-align: middle;
   }
 
-  /* 6. 移动端网站标题文字的样式 (保持不变) */
    .site-branding #topbar-title {
     font-size: 1.2em !important;
     color: var(--topbar-text-color, var(--text-color)) !important;
@@ -157,7 +180,6 @@
     max-width: 100%;
   }
 
-  /* --- 页面主体内容区域可能需要的边距调整 (保持不变) --- */
   #panel-wrapper,
   main {
     padding-top: 0px !important;
@@ -176,12 +198,12 @@
     margin-top: 0.5rem !important;
   }
 
-  /* --- 文章列表项在移动端的图文排列 (保持不变) --- */
   #post-list .post-preview {
     display: flex !important;
     flex-direction: row !important;
     align-items: stretch !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.5rem !important; /* 您之前调整的移动端列表项间距 */
+    min-height: 120px !important; /* 您之前调整的移动端列表项最小高度 */
   }
 
   #post-list .post-preview > div[class*="col-md-"] {
@@ -220,36 +242,47 @@
     padding: 0.25rem !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important; /* 修改：让内容从上到下紧凑排列 */
     height: 100% !important;
     box-sizing: border-box !important;
     flex-grow: 1;
   }
 
+  /* 修改：移动端文章列表标题单行省略号 */
   #post-list .post-preview .card-title {
-    font-size: 1.2rem !important;
-    line-height: 1.35 !important;
+    font-size: 1.2rem !important; /* 您之前设置的字体大小 */
+    line-height: 1.35 !important;  /* 您之前设置的行高 */
     margin-top: 0 !important;
-    margin-bottom: 0.3rem !important;
+    margin-bottom: 0.3rem !important; /* 您之前设置的间距 */
+    /* --- 新增实现单行省略号 --- */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important; /* 确保 overflow 和 text-overflow 生效 */
+    /* --- 移除之前可能的多行截断属性 --- */
+    /* display: -webkit-box; */
+    /* -webkit-line-clamp: initial; */ /* 或者移除这两行 */
+    /* -webkit-box-orient: initial; */ /* 或者移除这两行 */
   }
 
-  #post-list .post-preview .card-text.content {
-    font-size: 1.05rem !important;
-    line-height: 1.6 !important;
-    margin-bottom: 0.3rem !important;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-grow: 1;
+  #post-list .post-preview .card-text.content { /* 移动端摘要 */
+    font-size: 1.05rem !important; /* 您之前设置的字体大小 */
+    line-height: 1.6 !important; /* 您之前设置的行高 */
+    margin-bottom: 0.3rem !important; /* 您之前设置的间距 */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important; /* 移动端摘要保持3行 */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    /* flex-grow: 1; */
   }
 
   #post-list .post-preview .post-meta {
-    font-size: 0.8rem !important;
+    font-size: 0.8rem !important; /* 您之前设置的字体大小 */
+    margin-top: auto; /* 将元信息推到底部 */
   }
 
-  /* 移动端封面图片容器的高度 (保持不变) */
+  /* 移动端封面图片容器的高度 */
   .homepage-cover-banner {
     height: 250px !important;
   }
